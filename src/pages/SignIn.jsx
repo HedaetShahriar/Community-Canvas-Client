@@ -1,20 +1,50 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
+import AuthContext from "../contexts/AuthContext";
 // import { HiOutlineMail } from "react-icons/hi";
 // import { TbLockPassword } from "react-icons/tb";
 
 const SignIn = () => {
+    const { signInUser, googleSignIn, setUser } = use(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
     const handleGoogleLogin = () => {
-        // Implement Google login logic here
-        console.log("Google login clicked");
+        googleSignIn()
+            .then((result) => {
+                const user = result.user;
+                setUser(user);
+                // showAlert('Welcome back!', user.displayName);
+                navigate(`${location.state ? location.state : '/'}`);
+            })
+            .catch((error) => {
+                console.error("Google Sign In Error:", error);
+            });
     };
     const [showPassword, setShowPassword] = useState(false);
     const handleShowPassword = () => {
         setShowPassword(!showPassword);
     }
+    const handleForm = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        signInUser(email, password)
+            .then((result) => {
+                const user = result.user;
+                setUser(user);
+                // showAlert('Welcome back!', user.displayName);
+                navigate(`${location.state ? location.state : '/'}`);
+            })
+            .catch((error) => {
+                console.error("Login Error:", error.message);
+                // showAlert('Login failed', error.message, 'error');
+            });
+    };
     return (
         <>
             <Navbar />
@@ -37,12 +67,12 @@ const SignIn = () => {
                             </button>
                         </div>
                         <div className="divider my-2">OR</div>
-                        <form className="flex flex-col gap-2">
+                        <form onSubmit={handleForm} className="flex flex-col gap-2">
                             <label className="label">Email</label>
                             <div className="relative">
                                 <span className="absolute inset-y-0 z-10 left-0 pl-3 flex items-center pointer-events-none">
                                     {/* <HiOutlineMail size={22} /> */}
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                                 </span>
                                 <input name="email" type="email" className="input pl-10 w-full focus:outline-none" placeholder="Enter your Email" required />
                             </div>
@@ -51,7 +81,7 @@ const SignIn = () => {
                             <div className='relative'>
                                 <span className="absolute inset-y-0 z-10 left-0 pl-3 flex items-center pointer-events-none">
                                     {/* <TbLockPassword size={22} /> */}
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                                 </span>
                                 <input name="password" autoComplete='current-password' type={!showPassword ? 'password' : 'text'} className="input pl-10 w-full pr-9 focus:outline-none" placeholder="Enter your Password" required />
                                 <button type='button' onClick={handleShowPassword} className='absolute  right-2 top-2.5 z-10 text-gray-400'>

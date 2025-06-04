@@ -1,20 +1,59 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
+import AuthContext from "../contexts/AuthContext";
 // import { HiOutlineMail } from "react-icons/hi";
 // import { TbLockPassword } from "react-icons/tb";
 
 const Register = () => {
+    const { registerUser, googleSignIn, updateUserProfile, setUser } = use(AuthContext);
+    const navigate = useNavigate();
     const handleGoogleLogin = () => {
-        // Implement Google login logic here
-        console.log("Google login clicked");
+        googleSignIn()
+            .then((result) => {
+                const user = result.user;
+                setUser(user);
+                navigate('/');
+                console.log(user);
+                // showAlert('Welcome back!', user.displayName);
+                // navigate(`${location.state ? location.state : '/'}`);
+            })
+            .catch((error) => {
+                console.error("Google Sign In Error:", error);
+            });
     };
     const [showPassword, setShowPassword] = useState(false);
     const handleShowPassword = () => {
         setShowPassword(!showPassword);
     }
+    const handleForm = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const name = form.name.value;
+        const photoURL = form.photoURL.value;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        registerUser(email, password)
+            .then((result) => {
+                const user = result.user;
+                updateUserProfile(name, photoURL)
+                    .then(() => {
+                        setUser(user);
+                        // showAlert('Registration successful!', name);
+                        navigate('/');
+                    })
+                    .catch((error) => {
+                        console.error("Profile Update Error:", error.message);
+                    });
+            })
+            .catch((error) => {
+                console.error("Registration Error:", error.message);
+                // showAlert('Registration failed', error.message, 'error');
+            });
+    };
     return (
         <>
             <Navbar />
@@ -39,12 +78,13 @@ const Register = () => {
                         </div>
                         <div className="divider my-2">OR</div>
                         <p className=" text-center">Fill in the details below to register.</p>
-                        <form className="flex flex-col gap-1">
+                        {/* form */}
+                        <form onSubmit={handleForm} className="flex flex-col gap-1">
                             <label className="label mt-1">Full Name</label>
                             <div className="relative">
                                 <span className="absolute inset-y-0 z-10 left-0 pl-3 flex items-center pointer-events-none">
                                     {/* <HiOutlineMail size={22} /> */}
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                 </span>
                                 <input name="name" type="text" className="input pl-10 w-full focus:outline-none" placeholder="Enter your name" required />
                             </div>
@@ -52,7 +92,7 @@ const Register = () => {
                             <div className="relative">
                                 <span className="absolute inset-y-0 z-10 left-0 pl-3 flex items-center pointer-events-none">
                                     {/* <HiOutlineMail size={22} /> */}
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><path d="M10.083 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5.083"></path><path d="m14.5 6.5 3 3L8 19H5v-3Z"></path><path d="m14 3 6 6"></path></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400"><path d="M10.083 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5.083"></path><path d="m14.5 6.5 3 3L8 19H5v-3Z"></path><path d="m14 3 6 6"></path></svg>
                                 </span>
                                 <input name="photoURL" type="url" className="input pl-10 w-full focus:outline-none" placeholder="https://example.com/your-photo.jpg" required />
                             </div>
@@ -60,7 +100,7 @@ const Register = () => {
                             <div className="relative">
                                 <span className="absolute inset-y-0 z-10 left-0 pl-3 top-3">
                                     {/* <HiOutlineMail size={22} /> */}
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                                 </span>
                                 <input name="email" type="email" className="input pl-10 w-full validator focus:outline-none" placeholder="Enter your Email" required />
                                 <p className="hidden pl-6 validator-hint">Enter valid email address</p>
@@ -70,7 +110,7 @@ const Register = () => {
                             <div className='relative'>
                                 <span className="absolute inset-y-0 z-10 left-0 top-2.5 pl-3 ">
                                     {/* <TbLockPassword size={22} /> */}
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                                 </span>
                                 <input name="password" autoComplete='current-password' type={!showPassword ? 'password' : 'text'} className="input validator pl-10 w-full pr-9 focus:outline-none" placeholder="Enter your Password" minLength="6"
                                     pattern="(?=.*[a-z])(?=.*[A-Z]).{6,}"
