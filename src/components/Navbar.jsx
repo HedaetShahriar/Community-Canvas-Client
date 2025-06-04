@@ -57,7 +57,7 @@ const Navbar = () => {
             <div className="navbar-end space-x-3">
                 <ToggleTheme />
                 {!user ? (
-                    <Link to="/login" className="btn btn-sm btn-primary">Login</Link>
+                    <Link to="auth/login" className="btn btn-sm btn-primary">Login</Link>
                     // <button onClick={googleSignIn}> login</button>
                 ) : (
                     <div className="dropdown dropdown-end">
