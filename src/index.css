@@ -1,68 +1,73 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import "tailwindcss";
+@plugin "daisyui"{
+  themes: dim, pastel;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+
+@plugin "daisyui/theme" {
+  name: "dim";
+  color-scheme: "dark";
+  --color-base-100: oklch(30.857% 0.023 264.149);
+  --color-base-200: oklch(28.036% 0.019 264.182);
+  --color-base-300: oklch(26.346% 0.018 262.177);
+  --color-base-content: oklch(82.901% 0.031 222.959);
+  --color-primary: oklch(92% 0.084 155.995);
+  --color-primary-content: oklch(17.226% 0.028 139.549);
+  --color-secondary: oklch(73.375% 0.165 35.353);
+  --color-secondary-content: oklch(14.675% 0.033 35.353);
+  --color-accent: oklch(74.229% 0.133 311.379);
+  --color-accent-content: oklch(14.845% 0.026 311.379);
+  --color-neutral: oklch(24.731% 0.02 264.094);
+  --color-neutral-content: oklch(82.901% 0.031 222.959);
+  --color-info: oklch(92% 0.084 155.995);
+  --color-info-content: oklch(17.215% 0.028 206.182);
+  --color-success: oklch(86.171% 0.142 166.534);
+  --color-success-content: oklch(17.234% 0.028 166.534);
+  --color-warning: oklch(86.163% 0.142 94.818);
+  --color-warning-content: oklch(17.232% 0.028 94.818);
+  --color-error: oklch(82.418% 0.099 33.756);
+  --color-error-content: oklch(16.483% 0.019 33.756);
+  --radius-selector: 1rem;
+  --radius-field: 1rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+@plugin "daisyui/theme" {
+  name: "pastel";
+  default: true;
+  color-scheme: "light";
+  --color-base-100: oklch(100% 0 0);
+  --color-base-200: oklch(98.462% 0.001 247.838);
+  --color-base-300: oklch(92.462% 0.001 247.838);
+  --color-base-content: oklch(20% 0 0);
+  --color-primary: oklch(90% 0.063 306.703);
+  --color-primary-content: oklch(49% 0.265 301.924);
+  --color-secondary: oklch(89% 0.058 10.001);
+  --color-secondary-content: oklch(51% 0.222 16.935);
+  --color-accent: oklch(90% 0.093 164.15);
+  --color-accent-content: oklch(50% 0.118 165.612);
+  --color-neutral: oklch(55% 0.046 257.417);
+  --color-neutral-content: oklch(92% 0.013 255.508);
+  --color-info: oklch(86% 0.127 207.078);
+  --color-info-content: oklch(52% 0.105 223.128);
+  --color-success: oklch(87% 0.15 154.449);
+  --color-success-content: oklch(52% 0.154 150.069);
+  --color-warning: oklch(83% 0.128 66.29);
+  --color-warning-content: oklch(55% 0.195 38.402);
+  --color-error: oklch(80% 0.114 19.571);
+  --color-error-content: oklch(50% 0.213 27.518);
+  --radius-selector: 1rem;
+  --radius-field: 2rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 2px;
+  --depth: 0;
+  --noise: 0;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
