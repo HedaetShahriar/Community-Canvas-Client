@@ -71,3 +71,13 @@
   --noise: 0;
 }
 
+/* Hide Chrome/Edge/Safari's built-in eye or clear icons */
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+
+input[type="password"]::-webkit-textfield-decoration-container,
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  display: none !important;
+}
