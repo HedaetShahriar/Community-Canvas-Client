@@ -14,6 +14,30 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home />
+            },
+            {
+                path: "/upcoming-events",
+                element: <div className='text-2xl font-bold'>Upcoming Events</div>
+            },
+            {
+                path: "/create-event",
+                element: <div className='text-2xl font-bold'>Create Event</div>
+            },
+            {
+                path: "/joined-events",
+                element: <div className='text-2xl font-bold'>Joined Events</div>
+            },
+            {
+                path: "/manage-events",
+                element: <div className='text-2xl font-bold'>Manage Events</div>
+            },
+            {
+                path: "/about",
+                element: <div className='text-2xl font-bold'>About</div>
+            },
+            {
+                path: "/contact",
+                element: <div className='text-2xl font-bold'>Contact</div>
             }
         ]
     },

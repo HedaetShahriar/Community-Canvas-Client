@@ -10,14 +10,10 @@ const Navbar = () => {
 
     const navLinks = (
         <>
+            <li><NavLink to="/">Home</NavLink></li>
             <li><NavLink to="/upcoming-events">Upcoming Events</NavLink></li>
-            {user && (
-                <>
-                    <li><NavLink to="/create-event">Create Event</NavLink></li>
-                    <li><NavLink to="/joined-events">Joined Events</NavLink></li>
-                    <li><NavLink to="/manage-events">Manage Events</NavLink></li>
-                </>
-            )}
+            <li><NavLink to="/about">About</NavLink></li>
+            <li><NavLink to="/contact">Contact</NavLink></li>
         </>
     );
     const dropdownLinks = (
