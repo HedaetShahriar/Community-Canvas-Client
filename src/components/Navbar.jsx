@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router';
 import ToggleTheme from './ToggleTheme';
 import { MdLogout } from 'react-icons/md';
 import AuthContext from '../contexts/AuthContext';
+import userIcon from '../assets/userIcon.png'
 
 const Navbar = () => {
     const { user, logOut } = use(AuthContext);
@@ -35,81 +36,72 @@ const Navbar = () => {
             });
     }
     return (
-        <div className="navbar bg-base-100 shadow-lg px-4 sticky top-0 z-50">
-            {/* Navbar Start: Mobile dropdown and Logo */}
-            <div className="navbar-start">
-                <div className="dropdown">
-                    <label tabIndex={0} className="btn btn-ghost lg:hidden">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M4 6h16M4 12h8m-8 6h16"
-                            />
-                        </svg>
-                    </label>
-                    <ul
-                        tabIndex={0}
-                        className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-                    >
-                        {navLinks}
-                    </ul>
-                </div>
-                <Link to="/" className="btn btn-ghost text-xl md:text-2xl font-bold text-primary">
-                    Community Canvas
-                </Link>
-            </div>
-
-            {/* Navbar Center: Desktop navigation links */}
-            <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1 font-semibold">{navLinks}</ul>
-            </div>
-
-            {/* Navbar End: Theme toggle and User profile section */}
-            <div className="navbar-end gap-3">
-                
-
-                <ToggleTheme />
-                {user ? (
-                    <div className="dropdown dropdown-end">
-                        <label
-                            tabIndex={0}
-                            className="btn btn-ghost btn-circle avatar"
-                            title={user?.displayName || 'User profile'} // Show user's name on hover
-                        >
-                            <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                <img
-                                    alt="User profile picture"
-                                    src={
-                                        user.photoURL || 'https://placehold.co/100x100/a3e635/000000?text=U'
-                                    }
-                                    referrerPolicy='no-referrer'
-                                />
-                            </div>
-                        </label>
-                        <ul
-                            tabIndex={0}
-                            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-                        >
-                            {dropdownLinks}
-                            <div className='divider my-1'></div>
-                            <li>
-                                <button onClick={handleLogOut} className='btn btn-secondary btn-sm'><MdLogout size={24} /> Logout</button>
-                            </li>
-                        </ul>
+        <div className="bg-base-100 shadow-lg px-4 sticky top-0 z-50">
+            <div className='container mx-auto navbar'>
+                {/* Navbar Start: Mobile dropdown and Logo */}
+                <div className="navbar-start">
+                    <div className="flex items-center gap-2">
+                        <div className="dropdown">
+                            <label tabIndex={0} className="cursor-pointer lg:hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 12h16" /><path d="M4 18h16" /><path d="M4 6h16" /></svg>
+                            </label>
+                            <ul
+                                tabIndex={0}
+                                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                            >
+                                {navLinks}
+                            </ul>
+                        </div>
+                        <Link to="/" className="text-xl md:text-2xl font-bold">
+                            CommunityCanvas
+                        </Link>
                     </div>
-                ) : (
-                    <Link to="/auth/login" className="btn btn-primary btn-outline">
-                        Login
-                    </Link>
-                )}
+                </div>
+
+                {/* Navbar Center: Desktop navigation links */}
+                <div className="navbar-center hidden lg:flex">
+                    <ul className="menu menu-horizontal px-1 font-semibold">{navLinks}</ul>
+                </div>
+
+                {/* Navbar End: Theme toggle and User profile section */}
+                <div className="navbar-end gap-3">
+
+
+                    <ToggleTheme />
+                    {user ? (
+                        <div className="dropdown dropdown-end">
+                            <label
+                                tabIndex={0}
+                                className="btn btn-ghost btn-circle avatar"
+                                title={user?.displayName || 'User profile'} // Show user's name on hover
+                            >
+                                <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                    <img
+                                        alt="User profile picture"
+                                        src={
+                                            user.photoURL || userIcon
+                                        }
+                                        referrerPolicy='no-referrer'
+                                    />
+                                </div>
+                            </label>
+                            <ul
+                                tabIndex={0}
+                                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                            >
+                                {dropdownLinks}
+                                <div className='divider my-1'></div>
+                                <li>
+                                    <button onClick={handleLogOut} className='btn btn-secondary btn-sm'><MdLogout size={24} /> Logout</button>
+                                </li>
+                            </ul>
+                        </div>
+                    ) : (
+                        <Link to="/auth/login" className="btn btn-primary btn-outline">
+                            Login
+                        </Link>
+                    )}
+                </div>
             </div>
         </div>
     );

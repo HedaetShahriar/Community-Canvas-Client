@@ -15,12 +15,12 @@ const Footer = () => {
     ];
     return (
         <footer className="bg-base-200/60 backdrop-blur-xl border-t border-gray-200/80">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="py-8 flex flex-col items-center justify-between gap-8 md:flex-row">
                     <Link to="/" className="flex items-center gap-2.5">
                         {/* <div className="bg-blue-600 p-2 rounded-lg">logo</div> */}
                         {/* LOGO */}
-                        <span className="text-lg font-semibold">EventHub</span>
+                        <span className="text-lg font-semibold">CommunityCanvas</span>
                     </Link>
                     <nav>
                         <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">

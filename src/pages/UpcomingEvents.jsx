@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SearchFilter from '../components/Event/SearchFilter';
 
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,7 +8,12 @@ import Pagination from '../components/Pagination';
 const UpcomingEvents = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [eventType, setEventType] = useState('All');
-    const [layout, setLayout] = useState('list');
+    const [layout, setLayout] = useState(()=>{
+        return localStorage.getItem('eventLayout') || 'grid';
+    });
+    useEffect(() => {
+        localStorage.setItem('eventLayout', layout);
+    }, [layout]);
     
     const upcomingEvents = [
         { id: 1, title: "Dhaka University Campus Cleanup", location: "Dhaka University, Dhaka", date: "2025-06-21T09:00:00", type: "Cleanup" },
@@ -28,11 +33,11 @@ const UpcomingEvents = () => {
     });
 
     return (
-        <div className="bg-base-200 min-h-screen antialiased">
-            <div className="container mx-auto px-6 py-16 md:py-24">
+        <div className="bg-base-300 min-h-screen antialiased">
+            <div className="container mx-auto px-6 py-6 md:py-10">
                 <header className="text-center max-w-3xl mx-auto mb-12">
-                    <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900">Upcoming Events</h1>
-                    <p className="text-lg text-slate-600 mt-4">Find opportunities to volunteer and contribute to your community. Here’s what’s happening soon.</p>
+                    <h1 className="text-4xl md:text-5xl font-extrabold">Upcoming Events</h1>
+                    <p className="text-lg mt-4">Find opportunities to volunteer and contribute to your community. Here’s what’s happening soon.</p>
                 </header>
 
                 <SearchFilter 
@@ -61,9 +66,9 @@ const UpcomingEvents = () => {
                                 key="no-results"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
-                                className="text-center py-16 bg-white rounded-2xl"
+                                className="text-center py-16 bg-base-100 rounded-2xl"
                             >
-                                <h3 className="text-2xl font-bold text-slate-800">No Events Found</h3>
+                                <h3 className="text-2xl font-bold">No Events Found</h3>
                                 <p className="text-slate-600 mt-2">Try adjusting your search or filter to find other opportunities.</p>
                             </motion.div>
                         )}
