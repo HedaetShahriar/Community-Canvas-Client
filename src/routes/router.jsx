@@ -8,6 +8,8 @@ import Register from "../pages/Register";
 import UpcomingEvents from "../pages/UpcomingEvents";
 import ContactUs from "../pages/ContactUs";
 import JoinedEvents from "../pages/JoinedEvents";
+import ManageEvents from "../pages/ManageEvents";
+import ViewEvent from "../pages/ViewEvent";
 
 const router = createBrowserRouter([
     {
@@ -23,6 +25,10 @@ const router = createBrowserRouter([
                 element: <UpcomingEvents />
             },
             {
+                path: "upcoming-events/:id",
+                element: <ViewEvent/>
+            },
+            {
                 path: "/create-event",
                 element: <div className='text-2xl font-bold'>Create Event</div>
             },
@@ -32,7 +38,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/manage-events",
-                element: <div className='text-2xl font-bold'>Manage Events</div>
+                element: <ManageEvents/>
             },
             {
                 path: "/about",
