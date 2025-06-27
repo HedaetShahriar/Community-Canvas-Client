@@ -22,17 +22,25 @@ const SearchFilter = ({ searchQuery, setSearchQuery, eventType, setEventType, la
     return (
         <div className="bg-base-100 p-4 rounded-2xl shadow-sm mb-8 sticky top-20 z-20">
             <div className="flex justify-between items-center gap-4">
-                <div className="relative flex-grow">
+                <div className="relative flex-grow transition-all duration-300">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" />
                     <input
                         type="text"
                         placeholder="Search by event name or location..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full pl-12 pr-4 py-3 bg-base-200 border-2 border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:bg-base-100"
+                        className={`w-full pl-12 pr-4 py-3 bg-base-200 border-2 border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:bg-base-100 transition-all duration-300 ${
+                            searchQuery
+                                ? 'md:w-full'
+                                : 'md:w-full'
+                        }`}
                     />
                 </div>
-                <div className="flex items-center gap-2">
+                <div
+                    className={`flex items-center gap-2 transition-all duration-300 ${
+                        searchQuery ? 'hidden md:flex' : ''
+                    }`}
+                >
                     {/* Filter Dropdown Button */}
                     <div className="relative" ref={filterRef}>
                         <button
