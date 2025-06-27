@@ -5,6 +5,9 @@ import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home";
 import SignIn from "../pages/SignIn";
 import Register from "../pages/Register";
+import UpcomingEvents from "../pages/UpcomingEvents";
+import ContactUs from "../pages/ContactUs";
+import JoinedEvents from "../pages/JoinedEvents";
 
 const router = createBrowserRouter([
     {
@@ -17,7 +20,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/upcoming-events",
-                element: <div className='text-2xl font-bold'>Upcoming Events</div>
+                element: <UpcomingEvents />
             },
             {
                 path: "/create-event",
@@ -25,7 +28,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/joined-events",
-                element: <div className='text-2xl font-bold'>Joined Events</div>
+                element: <JoinedEvents />
             },
             {
                 path: "/manage-events",
@@ -37,7 +40,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/contact",
-                element: <div className='text-2xl font-bold'>Contact</div>
+                element: <ContactUs />
             }
         ]
     },
