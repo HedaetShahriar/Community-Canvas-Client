@@ -10,6 +10,7 @@ import ContactUs from "../pages/ContactUs";
 import JoinedEvents from "../pages/JoinedEvents";
 import ManageEvents from "../pages/ManageEvents";
 import ViewEvent from "../pages/ViewEvent";
+import CreateEvent from "../pages/CreateEvent";
 
 const router = createBrowserRouter([
     {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/create-event",
-                element: <div className='text-2xl font-bold'>Create Event</div>
+                element: <CreateEvent />
             },
             {
                 path: "/joined-events",
