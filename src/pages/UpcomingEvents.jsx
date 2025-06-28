@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import SearchFilter from '../components/Event/SearchFilter';
 
 import { motion, AnimatePresence } from 'framer-motion';
@@ -11,10 +11,7 @@ const UpcomingEvents = () => {
     const [layout, setLayout] = useState(()=>{
         return localStorage.getItem('eventLayout') || 'grid';
     });
-    useEffect(() => {
-        localStorage.setItem('eventLayout', layout);
-    }, [layout]);
-    
+
     const upcomingEvents = [
         { id: 1, title: "Dhaka University Campus Cleanup", location: "Dhaka University, Dhaka", date: "2025-06-21T09:00:00", type: "Cleanup" },
         { id: 2, title: "Rooppur Area Plantation", location: "Rooppur, Pabna", date: "2025-07-05T10:00:00", type: "Plantation" },

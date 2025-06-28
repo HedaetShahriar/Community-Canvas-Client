@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { Search, MapPin, List, LayoutGrid, ArrowRight, SlidersHorizontal } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import LayoutToggleButton from './LayoutToggleButton';
+import LayoutToggleButton from '../LayoutToggleButton';
 const SearchFilter = ({ searchQuery, setSearchQuery, eventType, setEventType, layout, setLayout }) => {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const filterRef = useRef(null);
@@ -77,16 +77,7 @@ const SearchFilter = ({ searchQuery, setSearchQuery, eventType, setEventType, la
                             )}
                         </AnimatePresence>
                     </div>
-
-                    {/* Layout Toggle Buttons */}
-                    <div className="bg-base-200 p-1 rounded-lg flex items-center gap-1">
-                        <LayoutToggleButton layout="list" active={layout === 'list'} onClick={() => setLayout('list')}>
-                            <List className="w-5 h-5" />
-                        </LayoutToggleButton>
-                        <LayoutToggleButton layout="grid" active={layout === 'grid'} onClick={() => setLayout('grid')}>
-                            <LayoutGrid className="w-5 h-5" />
-                        </LayoutToggleButton>
-                    </div>
+                    <LayoutToggleButton layout={layout} setLayout={setLayout}/>
                 </div>
             </div>
         </div>
