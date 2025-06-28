@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Edit, Trash2, PlusCircle, X, MapPin, Calendar, Eye, List, LayoutGrid, Layout, Link } from 'lucide-react';
+import { Edit, Trash2, PlusCircle, X, MapPin, Calendar, Eye, List, LayoutGrid, Layout, Link, Tag } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LayoutToggleButton from '../components/LayoutToggleButton';
+import DatePicker from 'react-datepicker';
 
 const EditEventModal = ({ event, isOpen, onClose, onSave }) => {
     const [formData, setFormData] = useState(event);
@@ -47,7 +48,7 @@ const EditEventModal = ({ event, isOpen, onClose, onSave }) => {
                             value={formData.title}
                             onChange={handleChange}
                             required
-                            className="w-full px-4 py-3 bg-base-300 border-2 border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition"
+                            className="w-full px-4 py-3 bg-base-300 border-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary focus:bg-base-200 transition"
                             placeholder="Enter event title"
                         />
                     </div>
@@ -62,9 +63,45 @@ const EditEventModal = ({ event, isOpen, onClose, onSave }) => {
                             value={formData.location}
                             onChange={handleChange}
                             required
-                            className="w-full px-4 py-3 bg-base-300 border-2 border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition"
+                            className="w-full px-4 py-3 bg-base-300 border-1  rounded-lg focus:outline-none focus:ring-1 focus:ring-primary focus:bg-base-200 transition"
                             placeholder="Enter location"
                         />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label className="font-semibold flex items-center gap-2 mb-1">
+                                <Tag className={`h-5 w-5 `} />
+                                Event Type
+                            </label>
+                            <select
+                                className='w-full pr-4 py-3 pl-3 bg-base-100 border-1 rounded-lg focus:outline-none
+                                focus:ring-1 
+                                focus:ring-primary
+                                transition-colors'
+                                name=""
+                                id=""
+                                value={formData.eventType}
+                            >
+                                <option disabled>Select event type</option>
+                                <option>Cleanup</option>
+                                <option>Plantation</option>
+                                <option>Donation</option>
+                                <option>Education</option>
+                            </select>
+                        </div>
+                        <div className="flex flex-col">
+                            <label className="font-semibold flex items-center gap-2 mb-1">
+                                <Calendar className={`h-5 w-5 `} />
+                                Event Date
+                            </label>
+                            <DatePicker
+                                selected={formData.eventDate}
+                                minDate={new Date()}
+                                placeholderText="Select a date"
+                                className={`w-full py-3 pl-3 pr-4 bg-base-100 border-1 rounded-lg focus:outline-none focus:bg-base-100 transition-colors
+                                focus:ring-1 focus:ring-primary`}
+                            />
+                        </div>
                     </div>
 
                     {/* Description */}
@@ -77,7 +114,7 @@ const EditEventModal = ({ event, isOpen, onClose, onSave }) => {
                             onChange={handleChange}
                             required
                             rows={4}
-                            className="w-full px-4 py-3 bg-base-300 border-2 border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition"
+                            className="w-full px-4 py-3 bg-base-300 border-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary focus:bg-base-200 transition"
                             placeholder="Enter description"
                         />
                     </div>
@@ -87,7 +124,7 @@ const EditEventModal = ({ event, isOpen, onClose, onSave }) => {
                     <button onClick={handleSubmit} className="px-6 py-2 rounded-lg font-semibold text-primary-content bg-primary hover:bg-opacity-90 transition-colors">Save Changes</button>
                 </footer>
             </motion.div>
-        </div>
+        </div >
     );
 };
 
@@ -253,7 +290,7 @@ const ManageEvents = () => {
                                 </motion.div>
                             )
                         ) : (
-                            <div className="text-center py-24 bg-white rounded-2xl shadow-sm">
+                            <div className="text-center py-24 bg-base-200 rounded-2xl shadow-sm">
                                 <h3 className="text-2xl font-bold">You haven't created any events yet.</h3>
                                 <p className=" mt-2 mb-6">Ready to make an impact? List your first event now!</p>
                                 <a href="#" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-content font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-opacity-90 transition-all">
