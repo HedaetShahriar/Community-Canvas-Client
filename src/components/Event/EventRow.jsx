@@ -81,11 +81,11 @@ const EventRow = ({ event }) => {
 
             {/* Action Button Section */}
             <div className="flex gap-3 md:flex-col lg:flex-row w-full md:w-auto md:justify-end">
-                <Link to={`/upcoming-events/${event.id}`} className="w-full md:w-auto bg-primary text-primary-content font-bold py-2 px-4 rounded-lg hover:bg-secondary transition-colors duration-300">
+                <Link to={`/event/${event.id}`} className="w-full md:w-auto bg-primary text-primary-content text-center font-bold py-2 px-4 rounded-lg hover:bg-secondary transition-colors duration-300">
                     Details
                 </Link>
                 <button className="w-full md:w-auto bg-primary text-primary-content font-bold py-2 px-4 rounded-lg hover:bg-secondary transition-colors duration-300">
-                    Join Event
+                    Join <span className='md:hidden lg:inline'>Event</span>
                 </button>
             </div>
         </motion.div>

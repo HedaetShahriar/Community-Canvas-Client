@@ -1,10 +1,10 @@
 import React from 'react';
-import Banner from '../components/Banner';
-import Features from '../components/Features';
-import HowItWorks from '../components/HowItWorks';
-import Gallery from '../components/Gallery';
-import Newsletter from '../components/Newsletter';
-import CreateEventCTA from '../components/CreateEventCTA';
+import Banner from '../components/Home/Banner';
+import Features from '../components/Home/Features';
+import HowItWorks from '../components/Home/HowItWorks';
+import Gallery from '../components/Home/Gallery';
+import Newsletter from '../components/Home/Newsletter';
+import CreateEventCTA from '../components/Home/CreateEventCTA';
 
 const Home = () => {
     return (

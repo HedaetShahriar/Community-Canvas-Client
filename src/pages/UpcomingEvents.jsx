@@ -66,7 +66,7 @@ const UpcomingEvents = () => {
                                 className="text-center py-16 bg-base-100 rounded-2xl"
                             >
                                 <h3 className="text-2xl font-bold">No Events Found</h3>
-                                <p className="text-slate-600 mt-2">Try adjusting your search or filter to find other opportunities.</p>
+                                <p className="mt-2">Try adjusting your search or filter to find other opportunities.</p>
                             </motion.div>
                         )}
                     </AnimatePresence>

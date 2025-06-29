@@ -238,10 +238,10 @@ const EventCardRow = ({ event, onEdit, onDelete }) => {
             </div>
 
             {/* Actions */}
-            <div className="flex justify-between md:flex-col  gap-2 md:ml-4">
+            <div className="flex justify-between md:flex-col w-full md:w-20  gap-2 md:ml-4">
                 <Link
                     to={`/event/${event.id}`}
-                    className="inline-flex justify-center items-center gap-1 text-primary-content bg-primary rounded-full px-3 hover:underline text-sm font-medium"
+                    className="inline-flex justify-center items-center gap-1 text-primary-content bg-primary rounded-2xl px-5 md:px-3 py-1 hover:underline text-sm font-medium"
                 >
                     <Eye className="w-4 h-4" /> View
                 </Link>
@@ -273,6 +273,7 @@ const ManageEvents = () => {
         { id: 3, title: "Clothing Drive", location: "Banani", date: "2024-12-15", type: "Donation", joined: 20, total: 20 }
     ]);
     const [layout, setLayout] = useState(localStorage.getItem('eventLayout') || 'grid');
+
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -313,7 +314,7 @@ const ManageEvents = () => {
                 <AnimatePresence mode="wait">
                     {myEvents.length > 0 ? (
                         layout === 'grid' ? (
-                            <motion.div key="grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <motion.div key="grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                                 {myEvents.map(event => (
                                     <EventCardGrid
                                         key={event.id}

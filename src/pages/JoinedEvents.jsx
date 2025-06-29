@@ -1,7 +1,123 @@
-import React, { useState } from 'react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import { MapPin, Calendar, ArrowRight, Search, ThumbsUp, Link } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { MapPin, Calendar, ThumbsUp, Search } from 'lucide-react';
+import { Link } from 'react-router';
+import { motion, AnimatePresence } from 'framer-motion';
+import LayoutToggleButton from '../components/LayoutToggleButton';
+
+const eventTypeColors = {
+    'Cleanup': 'bg-blue-100 text-blue-800',
+    'Plantation': 'bg-green-100 text-green-800',
+    'Donation': 'bg-yellow-100 text-yellow-800',
+    'Education': 'bg-purple-100 text-purple-800',
+    'Social Support': 'bg-blue-100 text-blue-800',
+};
+
+const EventCardGrid = ({ event, onCancel }) => {
+    const volunteerPercentage = (event.joined || 0) / (event.total || 1) * 100;
+
+    return (
+        <motion.div
+            layout
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.3 }}
+            className="bg-base-100 rounded-xl shadow-md overflow-hidden"
+        >
+            <div className="h-48 relative overflow-hidden">
+                <img src={`https://picsum.photos/seed/${event.id}/400/300`} alt={event.title} className="w-full h-full object-cover" />
+                <p className={`absolute top-2 right-2 px-3 py-1 text-xs font-semibold rounded-full ${eventTypeColors[event.type] || 'bg-gray-100 text-gray-800'}`}>{event.type}</p>
+            </div>
+            <div className="p-5">
+                <h2 className="text-xl font-bold">{event.title}</h2>
+                <div className="flex items-center mt-2 text-sm">
+                    <Calendar className="w-4 h-4 mr-2" /> <span>{new Date(event.date).toLocaleString()}</span>
+                </div>
+                <div className="flex items-center mt-1 text-sm">
+                    <MapPin className="w-4 h-4 mr-2" /> <span>{event.location}</span>
+                </div>
+                <div className="mt-3">
+                    <div className="flex justify-between text-sm">
+                        <span>Volunteers</span>
+                        <span>{event.joined || 0} / {event.total || 20}</span>
+                    </div>
+                    <div className="w-full bg-base-300 h-2 rounded-full mt-1">
+                        <div className="bg-primary h-2 rounded-full" style={{ width: `${volunteerPercentage}%` }} />
+                    </div>
+                </div>
+                <div className="flex justify-between items-center gap-3 mt-4">
+                    <Link to={`/event/${event.id}`} className="bg-primary text-primary-content text-center px-3 py-2 rounded-xl w-full hover:bg-primary/90 transition-colors font-medium">View</Link>
+                    <button
+                        className='bg-primary text-primary-content w-full px-3 py-2 rounded-xl hover:bg-primary/90 transition-colors font-medium'
+                        onClick={() => onCancel(event._id)}
+                    >Cancel
+                    </button>
+                </div>
+            </div>
+        </motion.div>
+    );
+};
+
+const EventCardRow = ({ event, onCancel }) => {
+    const volunteerPercentage = (event.joined || 0) / (event.total || 1) * 100;
+
+    return (
+        <motion.div
+            layout
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: 0.25 }}
+            className="flex flex-col md:flex-row items-center md:items-stretch bg-base-100 rounded-xl shadow-md p-4 md:p-6 gap-4 md:gap-6 w-full hover:shadow-lg transition-shadow duration-200"
+        >
+            {/* Image Section */}
+            <div className="relative w-full md:w-48 h-36 md:h-32 flex-shrink-0 rounded-lg overflow-hidden">
+                <img
+                    src={`https://picsum.photos/seed/${event.id}/400/300`}
+                    alt={event.title}
+                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                />
+                <span className={`absolute top-2 right-2 px-3 py-1 text-xs font-semibold rounded-full ${eventTypeColors[event.type] || 'bg-gray-100 text-gray-800'}`}>
+                    {event.type}
+                </span>
+            </div>
+
+            {/* Event Details */}
+            <div className="w-full md:flex-1 flex flex-col justify-between min-w-0">
+                <div>
+                    <h2 className="text-lg md:text-xl font-bold truncate">{event.title}</h2>
+                    <div className="flex items-center text-sm  mt-1">
+                        <Calendar className="w-4 h-4 mr-2" />
+                        <span>{new Date(event.date).toLocaleString()}</span>
+                    </div>
+                    <div className="flex items-center text-sm  mt-1">
+                        <MapPin className="w-4 h-4 mr-2" />
+                        <span className="truncate">{event.location}</span>
+                    </div>
+                </div>
+                <div className="mt-3">
+                    <div className="flex justify-between text-xs ">
+                        <span>Volunteers</span>
+                        <span>{event.joined || 0} / {event.total || 20}</span>
+                    </div>
+                    <div className="w-full bg-base-300 h-2 rounded-full mt-1">
+                        <div className="bg-primary h-2 rounded-full transition-all duration-300" style={{ width: `${volunteerPercentage}%` }} />
+                    </div>
+                </div>
+            </div>
+
+            {/* Actions */}
+            <div className="flex justify-around w-full md:flex-col md:w-30 gap-2 md:ml-4">
+                <Link to={`/event/${event.id}`} className="bg-primary text-primary-content px-3 py-2 rounded-xl text-center w-full hover:bg-primary/90 transition-colors text-sm font-medium">View</Link>
+                <button
+                    className='bg-primary w-full text-primary-content px-3 py-2 rounded-xl hover:bg-primary/90 transition-colors text-sm font-medium'
+                    onClick={() => onCancel(event._id)}
+                >Cancel
+                </button>
+            </div>
+        </motion.div>
+    );
+};
 
 const JoinedEvents = () => {
     const [joinedEvents, setJoinedEvents] = useState([
@@ -10,6 +126,10 @@ const JoinedEvents = () => {
         { id: 3, title: "Dhaka University Campus Cleanup", location: "Dhaka University, Dhaka", date: "2025-06-21", organizer: "DUCSU" },
         { id: 4, title: "Winter Clothing Drive 2024", location: "Banani, Dhaka", date: "2024-12-15", organizer: "Jaago Foundation" }
     ]);
+
+
+
+    const [layout, setLayout] = useState(localStorage.getItem('eventLayout') || 'grid');
 
     const sortedEvents = [...joinedEvents].sort((a, b) => {
         const dateA = new Date(a.date);
@@ -24,87 +144,65 @@ const JoinedEvents = () => {
         return aPast ? dateB - dateA : dateA - dateB;
     });
 
+    const onCancel = (eventId) => {
+        setJoinedEvents(prevEvents => prevEvents.filter(event => event.id !== eventId));
+        // Here you would also make an API call to cancel the event in the backend
+        console.log(`Event with ID ${eventId} has been cancelled.`);
+    };
+
     return (
-        <>
-            <div className="bg-base-200 min-h-screen antialiased font-sans">
-                <div className="container mx-auto px-6 py-16 md:py-24">
-                    {/* Page Header */}
-                    <header className="text-center max-w-3xl mx-auto mb-12">
-                        <h1 className="text-4xl md:text-5xl font-extrabold">My Joined Events</h1>
-                        <p className="text-lg mt-4">Thank you for your commitment! Here are the events you've signed up for.</p>
-                    </header>
-
-                    {/* Event List or Empty State */}
-                    <main>
-                        {sortedEvents.length > 0 ? (
-                            <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
-                                <table className="table w-full min-w-[640px]">
-                                    <thead className="bg-base-100 text-center  font-semibold text-sm rounded-t-lg">
-                                        <tr>
-                                            <th className="py-4 rounded-tl-2xl">No</th>
-                                            <th className="py-4">Event</th>
-                                            <th>Date</th>
-                                            <th>Status</th>
-                                            {/* <th>Last Watered</th>
-                                            <th>Next Watering Date</th> */}
-                                            <th className="rounded-tr-2xl">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="">
-                                        {sortedEvents.map((event, index) => {
-                                            const isCompleted = new Date(event.date) < new Date();
-                                            return (
-                                                <tr className={`transition-colors duration-200 ${isCompleted ? 'bg-base-300' : 'bg-base-100 hover:bg-base-300'}`} key={event.id}>
-                                                    <td className="py-3 font-medium">{index + 1}</td>
-                                                    <td className='text-left'>
-                                                        <p className={`font-bold text-lg ${isCompleted ? 'text-slate-500' : ''}`}>{event.title}</p>
-                                                        <p className="flex items-center text-sm text-slate-500 mt-1">
-                                                            <MapPin className="w-4 h-4 mr-2" /> {event.location}
-                                                        </p>
-                                                    </td>
-                                                    <td>
-                                                        <p className={`flex items-center font-semibold ${isCompleted ? 'text-slate-500' : ''}`}>
-                                                            <Calendar className="w-4 h-4 mr-2" /> {new Date(event.date).toLocaleDateString('en-GB', { month: 'long', day: 'numeric', year: 'numeric' })}
-                                                        </p>
-                                                    </td>
-                                                    <td>
-                                                        <span className={`h-2 w-2 p-2 rounded-full mr-2 ${isCompleted ? '' : 'bg-green-500'}`}>
-                                                            <span className={`font-semibold text-sm ${isCompleted ? 'text-slate-500' : 'text-white'}`}>
-                                                                {isCompleted ? 'Completed' : 'Upcoming'}
-                                                            </span>
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        <Link
-                                                            to={`/plants/details/${event.id}`}
-                                                            className="btn btn-sm btn-primary rounded-lg px-5 transition-transform hover:scale-105"
-                                                        >
-                                                            View Details
-                                                        </Link>
-                                                    </td>
-                                                </tr>
-                                            );
-
-                                        })}
-                                    </tbody>
-                                </table>
-                            </div>
-                        ) : (
-                            <div className="text-center py-24 bg-base-100 rounded-2xl shadow-sm">
-                                <div className="mx-auto bg-primary/10 text-primary w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                                    <ThumbsUp className="w-9 h-9" />
-                                </div>
-                                <h3 className="text-2xl font-bold ">You haven't joined any events yet.</h3>
-                                <p className=" mt-2 mb-6">Ready to make an impact? Find an event that inspires you!</p>
-                                <a href="/upcoming-events" className="btn btn-primary px-6 py-3 font-bold flex items-center gap-2 shadow-lg hover:bg-opacity-90 transition-all">
-                                    <Search className="w-5 h-5" /> Explore Events
-                                </a>
-                            </div>
-                        )}
-                    </main>
+        <div className="bg-base-200 min-h-screen py-16 px-6">
+            <div className="container mx-auto">
+                <div className="text-center mb-12">
+                    <h1 className="text-4xl md:text-5xl font-extrabold">My Joined Events</h1>
+                    <p className="text-lg mt-4">Thank you for your commitment! Here are the events you've signed up for.</p>
                 </div>
+                <div className="flex justify-end mb-6">
+                    <LayoutToggleButton layout={layout} setLayout={setLayout} />
+                </div>
+
+                {/* Events */}
+                <AnimatePresence mode="wait">
+                    {sortedEvents.length > 0 ? (
+                        layout === 'grid' ? (
+                            <motion.div key="grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                                {sortedEvents.map(event => (
+                                    <EventCardGrid
+                                        key={event.id}
+                                        event={event}
+                                        onCancel={onCancel}
+                                    />
+                                ))}
+                            </motion.div>
+                        ) : (
+                            <motion.div key="list" className="space-y-4">
+                                {sortedEvents.map(event => (
+                                    <EventCardRow
+                                        key={event.id}
+                                        event={event}
+                                        onCancel={onCancel}
+                                    />
+                                ))}
+                            </motion.div>
+                        )
+                    ) : (
+                        <div className="text-center py-24 bg-base-100 rounded-2xl shadow-sm">
+                            <div className="mx-auto bg-primary/10 text-primary w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                                <ThumbsUp className="w-9 h-9" />
+                            </div>
+                            <h3 className="text-2xl font-bold">You haven't joined any events yet.</h3>
+                            <p className="mt-2 mb-6">Ready to make an impact? Find an event that inspires you!</p>
+                            <Link
+                                to="/upcoming-events"
+                                className="btn btn-primary px-6 py-3 font-bold flex items-center gap-2 w-xs mx-auto shadow-lg hover:bg-opacity-90 transition-all"
+                            >
+                                <Search className="w-5 h-5" /> Explore Events
+                            </Link>
+                        </div>
+                    )}
+                </AnimatePresence>
             </div>
-        </>
+        </div>
     );
 };
 

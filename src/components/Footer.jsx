@@ -1,10 +1,23 @@
 import React from 'react';
-import { Github, Facebook,Linkedin } from 'lucide-react';
-import { Link } from 'react-router';
+import { Github, Facebook, Linkedin } from 'lucide-react';
+import { Link, NavLink } from 'react-router';
 const Footer = () => {
-    const navigationLinks = [
-        { href: "/events", text: "Events" }, { href: "/about", text: "About" }, { href: "/contact", text: "Contact" },
-    ];
+    const navLinks = (
+        <>
+            <li><NavLink to="/">Home</NavLink></li>
+            <li><NavLink to="/upcoming-events">Upcoming Events</NavLink></li>
+            {/* <li><NavLink to="/about">About</NavLink></li> */}
+            <li><NavLink to="/contact">Contact</NavLink></li>
+        </>
+    );
+    const dropdownLinks = (
+        <>
+            <li><NavLink to="/create-event">Create Event</NavLink></li>
+            <li><NavLink to="/manage-events">Manage Events</NavLink></li>
+            <li><NavLink to="/joined-events">Joined Events</NavLink></li>
+        </>
+
+    );
     const legalLinks = [
         { href: "/privacy", text: "Privacy Policy" }, { href: "/terms", text: "Terms of Service" },
     ];
@@ -23,12 +36,13 @@ const Footer = () => {
                         <span className="text-lg font-semibold">CommunityCanvas</span>
                     </Link>
                     <nav>
-                        <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-                            {navigationLinks.map((link) => (
-                                <li key={link.href}>
-                                    <Link to={link.href} className="text-sm font-medium  hover:text-blue-600 transition-colors duration-300">{link.text}</Link>
-                                </li>
-                            ))}
+                        <ul className="flex flex-col items-center justify-center gap-4">
+                            <div className='flex flex-wrap gap-4'>
+                                {navLinks}
+                            </div>
+                            <div className='flex flex-wrap gap-4'>
+                                {dropdownLinks}
+                            </div>
                         </ul>
                     </nav>
                     <div className="flex items-center space-x-4">

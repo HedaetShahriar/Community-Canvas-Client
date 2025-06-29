@@ -27,7 +27,7 @@ const router = createBrowserRouter([
                 element: <UpcomingEvents />
             },
             {
-                path: "upcoming-events/:id",
+                path: "/event/:id",
                 element: <PrivateRoutes><ViewEvent /></PrivateRoutes>
             },
             {

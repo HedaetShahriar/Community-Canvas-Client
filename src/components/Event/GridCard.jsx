@@ -117,9 +117,9 @@ const GridCard = ({ event }) => {
                     </div>
                 </div>
                 <div className="flex gap-3 mt-4">
-                    <button className="w-full bg-primary text-primary-content font-bold py-3 px-4 rounded-lg hover:bg-secondary transition-colors duration-300">
+                    <Link to={`/event/${event.id}`} className="w-full bg-primary text-primary-content text-center font-bold py-3 px-4 rounded-lg hover:bg-secondary transition-colors duration-300">
                         Details
-                    </button>
+                    </Link>
                     <button className="w-full bg-primary text-primary-content font-bold py-3 px-4 rounded-lg hover:bg-secondary transition-colors duration-300">
                         Join Event
                     </button>
