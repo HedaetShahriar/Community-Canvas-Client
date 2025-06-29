@@ -6,7 +6,7 @@ import LayoutToggleButton from '../LayoutToggleButton';
 const SearchFilter = ({ searchQuery, setSearchQuery, eventType, setEventType, layout, setLayout }) => {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const filterRef = useRef(null);
-    const eventTypes = ["All", "Cleanup", "Plantation", "Donation", "Education"];
+    const eventTypes = ["All", "Cleanup", "Plantation", "Donation", "Education" , "Social Work"];
 
     // Close dropdown when clicking outside
     useEffect(() => {

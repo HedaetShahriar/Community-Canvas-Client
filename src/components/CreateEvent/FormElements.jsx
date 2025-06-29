@@ -109,6 +109,6 @@ export const EventTypeSelect = ({ value, onChange, error, disabled }) => (
         <option value="Plantation">Plantation</option>
         <option value="Donation">Donation</option>
         <option value="Education">Education</option>
-        <option value="Social Support">Social Support</option>
+        <option value="Social Work">Social Work</option>
     </FormInput>
 );

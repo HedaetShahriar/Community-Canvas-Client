@@ -1,14 +1,29 @@
 // pages/CreateEvent.jsx
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 import { motion } from 'framer-motion';
 import { Send, Loader2 } from 'lucide-react';
 import EventForm from '../components/CreateEvent/EventForm';
+import axios from 'axios';
+import AuthContext from '../contexts/AuthContext';
+import { data } from 'react-router';
 
 const CreateEvent = () => {
+    const { user } = use(AuthContext);
+    // console.log(user.email);
     const [formData, setFormData] = useState({
-        title: '', description: '', type: '', imageUrl: '',
-        location: '', date: null, organizer: '', volunteersNeeded: '',
+        title: '',
+        description: '',
+        type: '',
+        imageUrl: '',
+        location: '',
+        date: null,
+        organizer: '',
+        volunteersNeeded: '',
+        volunteersJoined: 0,
+        joinedUsers: [],
+        addedBy: user.email || ''
     });
     const [errors, setErrors] = useState({});
     const [isClicked, setIsClicked] = useState(false);
@@ -21,7 +36,7 @@ const CreateEvent = () => {
     const handleDateChange = date => {
         setFormData(prev => ({ ...prev, date }));
     };
-
+    // console.log(formData);
     const validateForm = () => {
         const newErrors = {};
         if (!formData.title.trim()) newErrors.title = 'Event title is required.';
@@ -37,21 +52,46 @@ const CreateEvent = () => {
         return Object.keys(newErrors).length === 0;
     };
 
+    // console.log(import.meta.env.VITE_API_URL);
+    console.log(formData);
     const handleSubmit = e => {
         e.preventDefault();
         if (!validateForm()) return;
         setIsClicked(true);
-
-        setTimeout(() => {
-            setIsClicked(false);
-            Swal.fire({
-                title: 'Event Created!',
-                text: `"${formData.title}" has been successfully submitted.`,
-                icon: 'success',
-                confirmButtonText: 'Awesome!',
-                confirmButtonColor: '#8b5cf6',
+        // console.log(dataToSend);
+        const dataToSend = {
+            ...formData,
+            volunteersNeeded: Number(formData.volunteersNeeded),
+        };
+        axios.post(`${import.meta.env.VITE_API_URL}/events`, dataToSend)
+            .then(function (response) {
+                console.log(response);
+                Swal.fire({
+                    title: 'Event Created!',
+                    text: `"${formData.title}" has been successfully submitted.`,
+                    icon: 'success',
+                    confirmButtonText: 'Awesome!',
+                    confirmButtonColor: '#8b5cf6',
+                });
+                setIsClicked(false);
+                setFormData({
+                    title: '',
+                    description: '',
+                    type: '',
+                    imageUrl: '',
+                    location: '',
+                    date: null,
+                    organizer: '',
+                    volunteersNeeded: '',
+                    volunteersJoined: 0,
+                    joinedUsers: [],
+                    addedBy: user.email || ''
+                });
+                setErrors({});
+            })
+            .catch(function (error) {
+                console.log(error);
             });
-        }, 2000);
     };
 
     return (

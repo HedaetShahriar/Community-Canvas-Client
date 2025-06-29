@@ -10,7 +10,7 @@ const eventTypeColors = {
     'Plantation': 'bg-green-100 text-green-800',
     'Donation': 'bg-yellow-100 text-yellow-800',
     'Education': 'bg-purple-100 text-purple-800',
-    'Social Support': 'bg-blue-100 text-blue-800',
+    'Social Work': 'bg-blue-100 text-blue-800',
 };
 
 const EditEventModal = ({ event, isOpen, onClose, onSave }) => {

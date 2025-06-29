@@ -3,6 +3,7 @@ import {
     ArrowLeft, 
     ArrowRight
 } from 'lucide-react';
+import { Link } from 'react-router';
 
 const Banner = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -55,9 +56,9 @@ const Banner = () => {
                             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight max-w-3xl">{slide.title}</h1>
                             <p className="text-base md:text-lg mt-4 max-w-xl">{slide.description}</p>
                             <div className="mt-8">
-                                <a href="#" className={`${slide.buttonClass} text-white font-bold px-6 py-3 md:px-8 md:py-4 rounded-full transition-all text-base md:text-lg shadow-md`}>
+                                <Link to={`event/${slides.id}`} className={`${slide.buttonClass} text-white font-bold px-6 py-3 md:px-8 md:py-4 rounded-full transition-all text-base md:text-lg shadow-md`}>
                                     {slide.buttonText}
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

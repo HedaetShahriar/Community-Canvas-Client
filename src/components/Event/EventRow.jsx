@@ -4,30 +4,28 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router';
 
 const EventRow = ({ event }) => {
-    // Static data from the original GridCard for demonstration purposes
-    // In a real app, this would come from the `event` prop
-    const staticEvent = {
-        title: 'Food Drive',
-        subtitle: 'Food Distribution - Gulshan, Dhaka',
-        date: 'July 25, 2025, 12:00 PM',
-        location: 'Gulshan Community Park',
-        tags: ['Hunger Relief', 'Social Support'],
-        volunteers: {
-            joined: 15,
-            total: 20,
-        },
-    };
+    const { _id, title, date, imageUrl, location, type, volunteersNeeded, volunteersJoined } = event;
 
-    // Mapping for event type colors, similar to the original card
+    const dateObj = new Date(date);
+    const formattedDate = dateObj.toLocaleDateString('en-US', {
+        weekday: 'short',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+    });
+
     const eventTypeColors = {
         'Cleanup': 'bg-blue-100 text-blue-800',
         'Plantation': 'bg-green-100 text-green-800',
         'Donation': 'bg-yellow-100 text-yellow-800',
         'Education': 'bg-purple-100 text-purple-800',
-        'Social Support': 'bg-blue-100 text-blue-800',
+        'Social Work': 'bg-blue-100 text-blue-800',
     };
 
-    const volunteerPercentage = (staticEvent.volunteers.joined / staticEvent.volunteers.total) * 100;
+    const volunteerPercentage = (volunteersJoined / volunteersNeeded) * 100;
 
     return (
         <motion.div
@@ -42,25 +40,25 @@ const EventRow = ({ event }) => {
                 {/* Image Section */}
                 <div className="relative h-32 w-full md:w-40 flex-shrink-0 rounded-lg overflow-hidden">
                     <img
-                        src={`https://picsum.photos/seed/${event.id}/400/300`}
-                        alt={staticEvent.title}
+                        src={imageUrl}
+                        alt={title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    <p className={`absolute top-2 right-2 px-3 py-1 text-xs font-semibold rounded-full ${eventTypeColors[event.type] || 'bg-gray-100 text-gray-800'}`}>
-                        {event.type}
+                    <p className={`absolute top-2 right-2 px-3 py-1 text-xs font-semibold rounded-full ${eventTypeColors[type] || 'bg-gray-100 text-gray-800'}`}>
+                        {type}
                     </p>
                 </div>
 
                 {/* Event Details Section */}
                 <div className="flex flex-col justify-center min-w-0">
-                    <h2 className="text-xl font-bold group-hover:text-primary transition-colors duration-300">{staticEvent.subtitle}</h2>
+                    <h2 className="text-xl font-bold group-hover:text-primary transition-colors duration-300">{title}</h2>
                     <div className="flex items-center text-sm mt-2">
                         <Calendar className="w-4 h-4 mr-2 flex-shrink-0" />
-                        <span>{staticEvent.date}</span>
+                        <span>{formattedDate}</span>
                     </div>
                     <div className="flex items-center text-sm mt-1">
                         <MapPin className="w-4 h-4 mr-2 flex-shrink-0" />
-                        <span>{staticEvent.location}</span>
+                        <span>{location}</span>
                     </div>
                 </div>
             </div>
@@ -69,7 +67,7 @@ const EventRow = ({ event }) => {
             <div className="flex flex-col justify-center w-full md:w-40">
                 <div className="flex justify-between items-center text-sm">
                     <p className="font-semibold">Volunteers</p>
-                    <p>{staticEvent.volunteers.joined} / {staticEvent.volunteers.total}</p>
+                    <p>{volunteersJoined} / {volunteersNeeded}</p>
                 </div>
                 <div className="w-full bg-base-300 rounded-full h-2 mt-1">
                     <div
@@ -81,7 +79,7 @@ const EventRow = ({ event }) => {
 
             {/* Action Button Section */}
             <div className="flex gap-3 md:flex-col lg:flex-row w-full md:w-auto md:justify-end">
-                <Link to={`/event/${event.id}`} className="w-full md:w-auto bg-primary text-primary-content text-center font-bold py-2 px-4 rounded-lg hover:bg-secondary transition-colors duration-300">
+                <Link to={`/events/${_id}`} className="w-full md:w-auto bg-primary text-primary-content text-center font-bold py-2 px-4 rounded-lg hover:bg-secondary transition-colors duration-300">
                     Details
                 </Link>
                 <button className="w-full md:w-auto bg-primary text-primary-content font-bold py-2 px-4 rounded-lg hover:bg-secondary transition-colors duration-300">

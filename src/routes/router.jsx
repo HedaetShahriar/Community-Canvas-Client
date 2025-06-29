@@ -12,6 +12,7 @@ import ManageEvents from "../pages/ManageEvents";
 import ViewEvent from "../pages/ViewEvent";
 import CreateEvent from "../pages/CreateEvent";
 import PrivateRoutes from "./PrivateRoutes";
+import axios from "axios";
 
 const router = createBrowserRouter([
     {
@@ -24,10 +25,15 @@ const router = createBrowserRouter([
             },
             {
                 path: "/upcoming-events",
-                element: <UpcomingEvents />
+                element: <UpcomingEvents />,
+                loader: async () => {
+                    const response = await axios.get(`${import.meta.env.VITE_API_URL}/events`);
+                    return response.data;
+                },
+                hydrateFallbackElement: <div className='text-2xl font-bold'>Loading Upcoming Events...</div>
             },
             {
-                path: "/event/:id",
+                path: "events/:id",
                 element: <PrivateRoutes><ViewEvent /></PrivateRoutes>
             },
             {
@@ -54,7 +60,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/auth/login",
-        element:<SignIn />
+        element: <SignIn />
     },
     {
         path: "/auth/register",
