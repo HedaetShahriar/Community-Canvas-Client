@@ -1,16 +1,16 @@
-import React, { use, useEffect, useState } from 'react';
+// import React, { use, useEffect, useState } from 'react';
 import { Calendar, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router';
-import Swal from 'sweetalert2';
-import axios from 'axios';
-import AuthContext from '../../contexts/AuthContext';
+// import Swal from 'sweetalert2';
+// import axios from 'axios';
+// import AuthContext from '../../contexts/AuthContext';
 
 const MotionLink = motion.create(Link);
 
 const GridCard = ({ event, setHasJoined }) => {
-    const [alreadyJoined, setAlreadyJoined] = useState(false);
-    const { user } = use(AuthContext);
+    // const [alreadyJoined, setAlreadyJoined] = useState(false);
+    // const { user } = use(AuthContext);
     // console.log(event);
     const { _id, title, date, description, imageUrl, location, type, volunteersNeeded, volunteersJoined, joinedUsers, addedBy, organizer } = event;
     const dateObj = new Date(date);
@@ -34,72 +34,72 @@ const GridCard = ({ event, setHasJoined }) => {
 
     const volunteerPercentage = (volunteersJoined / volunteersNeeded) * 100;
 
-    useEffect(() => {
-        if (user) {
-            if (joinedUsers.includes(user?.email)) {
-                setAlreadyJoined(true);
-            }
-        }
-    }, [joinedUsers, user]);
+    // useEffect(() => {
+    //     if (user) {
+    //         if (joinedUsers.includes(user?.email)) {
+    //             setAlreadyJoined(true);
+    //         }
+    //     }
+    // }, [joinedUsers, user]);
 
-    const handleJoin = (id) => {
-        if (!user) {
-            Swal.fire({
-                title: 'Please Log In first',
-                text: 'You need to be logged in to join an event.',
-                icon: 'warning',
-                timer: 2000,
-                showConfirmButton: false,
-                timerProgressBar: true,
-            });
-            return;
-        }
-        Swal.fire({
-            title: 'Confirm Your Spot?',
-            text: `You are about to join "${title}"`,
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, Count Me In!',
-            cancelButtonText: 'Not Now',
-            confirmButtonColor: '#4ade80',
-            cancelButtonColor: '#f87171',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axios.patch(`${import.meta.env.VITE_API_URL}/events/${id}/join`, {
-                    email: user.email,
-                }).then((response) => {
-                    if (response.data.success) {
-                        Swal.fire({
-                            title: 'Joined Successfully!',
-                            text: `You have successfully joined the event "${title}".`,
-                            icon: 'success',
-                            confirmButtonText: 'Great!',
-                            confirmButtonColor: '#8b5cf6'
-                        });
-                        setAlreadyJoined(true);
-                        setHasJoined(prev => !prev);
-                    } else {
-                        Swal.fire({
-                            title: 'Already Joined',
-                            text: 'You have already joined this event.',
-                            icon: 'info',
-                            confirmButtonText: 'OK',
-                            confirmButtonColor: '#8b5cf6'
-                        });
-                    }
-                }).catch((error) => {
-                    console.error('Error joining event:', error);
-                    Swal.fire({
-                        title: 'Error',
-                        text: 'There was an issue joining the event. Please try again later.',
-                        icon: 'error',
-                        confirmButtonText: 'OK',
-                        confirmButtonColor: '#f87171'
-                    });
-                });
-            }
-        });
-    };
+    // const handleJoin = (id) => {
+    //     if (!user) {
+    //         Swal.fire({
+    //             title: 'Please Log In first',
+    //             text: 'You need to be logged in to join an event.',
+    //             icon: 'warning',
+    //             timer: 2000,
+    //             showConfirmButton: false,
+    //             timerProgressBar: true,
+    //         });
+    //         return;
+    //     }
+    //     Swal.fire({
+    //         title: 'Confirm Your Spot?',
+    //         text: `You are about to join "${title}"`,
+    //         icon: 'question',
+    //         showCancelButton: true,
+    //         confirmButtonText: 'Yes, Count Me In!',
+    //         cancelButtonText: 'Not Now',
+    //         confirmButtonColor: '#4ade80',
+    //         cancelButtonColor: '#f87171',
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             axios.patch(`${import.meta.env.VITE_API_URL}/events/${id}/join`, {
+    //                 email: user.email,
+    //             }).then((response) => {
+    //                 if (response.data.success) {
+    //                     Swal.fire({
+    //                         title: 'Joined Successfully!',
+    //                         text: `You have successfully joined the event "${title}".`,
+    //                         icon: 'success',
+    //                         confirmButtonText: 'Great!',
+    //                         confirmButtonColor: '#8b5cf6'
+    //                     });
+    //                     setAlreadyJoined(true);
+    //                     setHasJoined(prev => !prev);
+    //                 } else {
+    //                     Swal.fire({
+    //                         title: 'Already Joined',
+    //                         text: 'You have already joined this event.',
+    //                         icon: 'info',
+    //                         confirmButtonText: 'OK',
+    //                         confirmButtonColor: '#8b5cf6'
+    //                     });
+    //                 }
+    //             }).catch((error) => {
+    //                 console.error('Error joining event:', error);
+    //                 Swal.fire({
+    //                     title: 'Error',
+    //                     text: 'There was an issue joining the event. Please try again later.',
+    //                     icon: 'error',
+    //                     confirmButtonText: 'OK',
+    //                     confirmButtonColor: '#f87171'
+    //                 });
+    //             });
+    //         }
+    //     });
+    // };
 
     return (
         <motion.div
@@ -144,13 +144,13 @@ const GridCard = ({ event, setHasJoined }) => {
                     <Link to={`/events/${event._id}`} className="w-full bg-primary text-primary-content text-center font-bold py-3 px-4 rounded-lg hover:bg-secondary transition-colors duration-300">
                         Details
                     </Link>
-                    <button
+                    {/* <button
                         onClick={() => handleJoin(_id)}
                         className={`w-full bg-primary text-primary-content font-bold py-3 px-4 rounded-lg hover:bg-secondary transition-colors duration-300 ${alreadyJoined ? 'opacity-50 cursor-not-allowed' : ''}`}
                         disabled={alreadyJoined}
                     >
                         {alreadyJoined ? 'Joined' : 'Join Event'}
-                    </button>
+                    </button> */}
                 </div>
             </div>
         </motion.div>

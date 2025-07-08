@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useParams } from 'react-router';
 import axios from 'axios';
 import AuthContext from '../contexts/AuthContext';
+import Spinner from '../components/Spinner';
 
 
 const ViewEvent = () => {
@@ -27,9 +28,7 @@ const ViewEvent = () => {
     }, [hasJoined, id, user.email]);
     
     if (!event) {
-        return (<div className="min-h-screen flex items-center justify-center bg-base-200">
-            <div className="text-2xl font-bold">Loading Event Details...</div>
-        </div>);
+        return (<Spinner />);
     }
 
     const { _id, title, date, description, imageUrl, location, type, volunteersNeeded, volunteersJoined, organizer } = event || {};

@@ -1,13 +1,13 @@
 import axios from 'axios';
-import React from 'react';
 import useAuth from './useAuth';
-import { signOut } from 'firebase/auth';
+import { useNavigate} from 'react-router';
 
 const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_API_URL
 });
 
 const useAxiosSecure = () => {
+    const navigate = useNavigate();
 
     const { user, logOut } = useAuth();
 
@@ -22,6 +22,7 @@ const useAxiosSecure = () => {
             logOut()
                 .then(() => {
                     console.error('Unauthorized access - user logged out');
+                    navigate('/auth/login');
                 })
                 .catch(logoutError => {
                     console.error('Error during logout:', logoutError);

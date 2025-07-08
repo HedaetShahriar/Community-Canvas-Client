@@ -13,6 +13,7 @@ import ViewEvent from "../pages/ViewEvent";
 import CreateEvent from "../pages/CreateEvent";
 import PrivateRoutes from "./PrivateRoutes";
 import axios from "axios";
+import Spinner from "../components/Spinner";
 
 const router = createBrowserRouter([
     {
@@ -26,12 +27,12 @@ const router = createBrowserRouter([
             {
                 path: "/upcoming-events",
                 element: <UpcomingEvents />,
-                hydrateFallbackElement: <div className='text-2xl font-bold'>Loading Upcoming Events...</div>
+                hydrateFallbackElement: <Spinner/>
             },
             {
                 path: "/events/:id",
                 element: <PrivateRoutes><ViewEvent /></PrivateRoutes>,
-                hydrateFallbackElement: <div className='text-2xl font-bold'>Loading Event Details...</div>
+                hydrateFallbackElement: <Spinner/>
             },
             {
                 path: "/create-event",
@@ -39,11 +40,13 @@ const router = createBrowserRouter([
             },
             {
                 path: "/joined-events",
-                element: <PrivateRoutes><JoinedEvents /></PrivateRoutes>
+                element: <PrivateRoutes><JoinedEvents /></PrivateRoutes>,
+                hydrateFallbackElement: <Spinner/>
             },
             {
                 path: "/manage-events",
-                element: <PrivateRoutes><ManageEvents /></PrivateRoutes>
+                element: <PrivateRoutes><ManageEvents /></PrivateRoutes>,
+                hydrateFallbackElement: <Spinner/>
             },
             {
                 path: "/about",

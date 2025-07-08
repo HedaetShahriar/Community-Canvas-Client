@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import imageSearch from '../../assets/searchEvents.png';
+import imageEventPage from '../../assets/joinedEvent.png';
+import imageVolunteers from '../../assets/volunteers Working.png';
 
 const HowItWorks = () => {
     const [activeTab, setActiveTab] = useState('discover');
@@ -6,7 +9,7 @@ const HowItWorks = () => {
     const TabButton = ({ tabId, children }) => (
         <button
             onClick={() => setActiveTab(tabId)}
-            className={`w-full sm:w-auto text-base md:text-lg font-semibold py-4 px-6 text-center border-b-4 transition-all duration-300 ${activeTab === tabId ? 'border-primary text-primary' : 'border-transparent text-body'
+            className={`w-full sm:w-auto text-base md:text-lg font-semibold py-4 px-6 text-center border-b-4 transition-all duration-300 ${activeTab === tabId ? 'border-success text-success' : 'border-transparent text-body'
                 }`}
         >
             {children}
@@ -40,9 +43,9 @@ const HowItWorks = () => {
                     <TabButton tabId="participate">3. Participate</TabButton>
                 </div>
                 <div>
-                    <TabPanel tabId="discover" title="Find Passionate Events" text="Easily find local opportunities. Search by cause or location to find the perfect event for you." imgSrc="https://placehold.co/600x500/F3F4F6/1F2937?text=Mockup+of+Event+Search" />
-                    <TabPanel tabId="join" title="Join with a Single Click" text="Signing up is effortless. Click 'Join' and all event details are added to your personal dashboard." imgSrc="https://placehold.co/600x500/F3F4F6/1F2937?text=Mockup+of+Event+Page" />
-                    <TabPanel tabId="participate" title="Connect with Your Community" text="Show up, meet like-minded people, and make a real difference together. It's more than volunteering—it's building connections." imgSrc="https://placehold.co/600x500/F3F4F6/1F2937?text=Image+of+Volunteers+Working" />
+                    <TabPanel tabId="discover" title="Find Passionate Events" text="Easily find local opportunities. Search by cause or location to find the perfect event for you." imgSrc={imageEventPage} />
+                    <TabPanel tabId="join" title="Join with a Single Click" text="Signing up is effortless. Click 'Join' and all event details are added to your personal dashboard." imgSrc={imageSearch} />
+                    <TabPanel tabId="participate" title="Connect with Your Community" text="Show up, meet like-minded people, and make a real difference together. It's more than volunteering—it's building connections." imgSrc={imageVolunteers}/>
                 </div>
             </div>
         </section>

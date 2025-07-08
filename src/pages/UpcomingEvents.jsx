@@ -15,7 +15,6 @@ const UpcomingEvents = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(8); // You can change the page size
 
-
     const [layout, setLayout] = useState(() => {
         return localStorage.getItem('eventLayout') || 'grid';
     });

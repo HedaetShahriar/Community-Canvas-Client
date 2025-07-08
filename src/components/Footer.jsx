@@ -4,20 +4,55 @@ import { Link, NavLink } from 'react-router';
 const Footer = () => {
     const navLinks = (
         <>
-            <li><NavLink to="/">Home</NavLink></li>
-            <li><NavLink to="/upcoming-events">Upcoming Events</NavLink></li>
-            {/* <li><NavLink to="/about">About</NavLink></li> */}
-            <li><NavLink to="/contact">Contact</NavLink></li>
+            <li>
+                <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                        `px-3 py-1 rounded transition-colors duration-150 ${isActive
+                            ? "text-accent-content"
+                            : " hover:text-accent-content"
+                        }`
+                    }
+                >
+                    Home
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    to="/upcoming-events"
+                    className={({ isActive }) =>
+                        `px-3 py-1 rounded transition-colors duration-150 ${isActive
+                            ? "text-accent-content"
+                            : " hover:text-accent-content"
+                        }`
+                    }
+                >
+                    Upcoming Events
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    to="/contact"
+                    className={({ isActive }) =>
+                        `px-3 py-1 rounded transition-colors duration-150 ${isActive
+                            ? "text-accent-content"
+                            : "hover:text-accent-content"
+                        }`
+                    }
+                >
+                    Contact
+                </NavLink>
+            </li>
         </>
     );
-    const dropdownLinks = (
-        <>
-            <li><NavLink to="/create-event">Create Event</NavLink></li>
-            <li><NavLink to="/manage-events">Manage Events</NavLink></li>
-            <li><NavLink to="/joined-events">Joined Events</NavLink></li>
-        </>
+    // const dropdownLinks = (
+    //     <>
+    //         <li><NavLink to="/create-event">Create Event</NavLink></li>
+    //         <li><NavLink to="/manage-events">Manage Events</NavLink></li>
+    //         <li><NavLink to="/joined-events">Joined Events</NavLink></li>
+    //     </>
 
-    );
+    // );
     const legalLinks = [
         { href: "/privacy", text: "Privacy Policy" }, { href: "/terms", text: "Terms of Service" },
     ];
@@ -27,7 +62,7 @@ const Footer = () => {
         { href: "https://www.linkedin.com/in/hedaet-shahriar/", icon: <Linkedin size={18} /> },
     ];
     return (
-        <footer className="bg-base-200/60 backdrop-blur-xl border-t border-gray-200/80">
+        <footer className="bg-base-200/60 backdrop-blur-xl border-t border-gray-400/80">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="py-8 flex flex-col items-center justify-between gap-8 md:flex-row">
                     <Link to="/" className="flex items-center gap-2.5">
@@ -40,9 +75,9 @@ const Footer = () => {
                             <div className='flex flex-wrap gap-4'>
                                 {navLinks}
                             </div>
-                            <div className='flex flex-wrap gap-4'>
+                            {/* <div className='flex flex-wrap gap-4'>
                                 {dropdownLinks}
-                            </div>
+                            </div> */}
                         </ul>
                     </nav>
                     <div className="flex items-center space-x-4">

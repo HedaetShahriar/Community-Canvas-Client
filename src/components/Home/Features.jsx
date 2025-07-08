@@ -1,4 +1,8 @@
 import React from 'react';
+import createEvent from '../../assets/createEvents.png';
+import manageEvent from '../../assets/manageEvents.png';
+import volunteerProfile from '../../assets/volunteers Working.png';
+
 import { 
     CheckCircle2
 } from 'lucide-react';
@@ -13,19 +17,19 @@ const Features = () => {
                 <div className="space-y-16 md:space-y-24">
                     <div className="grid md:grid-cols-2 items-center gap-8 md:gap-12">
                         <div className="text-center md:text-left">
-                            <span className="inline-block bg-secondary/10 text-secondary font-semibold px-4 py-1 rounded-full mb-4">For Organizers</span>
+                            <span className="inline-block bg-secondary text-secondary-content font-semibold px-4 py-1 rounded-full mb-4">For Organizers</span>
                             <h3 className="text-2xl md:text-3xl font-bold text-dark">Create Events Seamlessly</h3>
                             <p className="mt-4 text-base md:text-lg text-body">Bring your community initiative to life. Our simple form lets you set up your event, define your goals, and start gathering volunteers in minutes.</p>
                             <ul className="mt-6 space-y-4 text-base md:text-lg">
-                                <li className="flex items-start"><CheckCircle2 className="w-6 h-6 text-secondary mr-3 mt-1 flex-shrink-0" /><span><strong>Set Clear Goals:</strong> Define volunteer numbers and objectives.</span></li>
-                                <li className="flex items-start"><CheckCircle2 className="w-6 h-6 text-secondary mr-3 mt-1 flex-shrink-0" /><span><strong>Schedule & Locate:</strong> Pinpoint the exact time and location on a map.</span></li>
+                                <li className="flex items-start"><CheckCircle2 className="w-6 h-6 text-secondary-content mr-3 mt-1 flex-shrink-0" /><span><strong>Set Clear Goals:</strong> Define volunteer numbers and objectives.</span></li>
+                                <li className="flex items-start"><CheckCircle2 className="w-6 h-6 text-secondary-content mr-3 mt-1 flex-shrink-0" /><span><strong>Schedule & Locate:</strong> Pinpoint the exact time and location on a map.</span></li>
                             </ul>
                         </div>
-                        <div className="bg-gray-100 p-6 md:p-8 rounded-2xl shadow-md"><img src="https://placehold.co/600x500/F3F4F6/1F2937?text=Mockup+of+Create+Event+Form" alt="Create Event Form Mockup" className="rounded-xl w-full h-auto" /></div>
+                        <div className="bg-gray-100 p-6 md:p-8 rounded-2xl shadow-md"><img src={createEvent} alt="Create Event Form Mockup" className="rounded-xl w-full h-auto" /></div>
                     </div>
                     <div className="grid md:grid-cols-2 items-center gap-8 md:gap-12">
                         <div className="md:order-last text-center md:text-left">
-                            <span className="inline-block bg-primary/10 text-primary font-semibold px-4 py-1 rounded-full mb-4">For Organizers</span>
+                            <span className="inline-block bg-primary text-primary-content font-semibold px-4 py-1 rounded-full mb-4">For Organizers</span>
                             <h3 className="text-2xl md:text-3xl font-bold text-dark">Manage Like a Pro</h3>
                             <p className="mt-4 text-base md:text-lg text-body">Your organizer dashboard gives you a bird's-eye view of your event. Communicate with volunteers, track sign-ups, and make updates on the fly.</p>
                             <ul className="mt-6 space-y-4 text-base md:text-lg">
@@ -33,11 +37,11 @@ const Features = () => {
                                 <li className="flex items-start"><CheckCircle2 className="w-6 h-6 text-primary mr-3 mt-1 flex-shrink-0" /><span><strong>Send Updates:</strong> Easily send announcements to all participants.</span></li>
                             </ul>
                         </div>
-                        <div className="bg-gray-100 p-6 md:p-8 rounded-2xl shadow-md"><img src="https://placehold.co/600x500/F3F4F6/1F2937?text=Mockup+of+Management+Dashboard" alt="Event Management Dashboard Mockup" className="rounded-xl w-full h-auto" /></div>
+                        <div className="bg-gray-100 p-6 md:p-8 rounded-2xl shadow-md"><img src={manageEvent} alt="Event Management Dashboard Mockup" className="rounded-xl w-full h-auto" /></div>
                     </div>
                     <div className="grid md:grid-cols-2 items-center gap-8 md:gap-12">
                         <div className="text-center md:text-left">
-                            <span className="inline-block bg-accent/10 text-accent font-semibold px-4 py-1 rounded-full mb-4">For Volunteers</span>
+                            <span className="inline-block bg-accent text-white font-semibold px-4 py-1 rounded-full mb-4">For Volunteers</span>
                             <h3 className="text-2xl md:text-3xl font-bold text-dark">Your Volunteer Hub</h3>
                             <p className="mt-4 text-base md:text-lg text-body">Find events you're passionate about and join with one click. Your personal dashboard keeps track of your schedule and contribution history.</p>
                             <ul className="mt-6 space-y-4 text-base md:text-lg">
@@ -45,7 +49,7 @@ const Features = () => {
                                 <li className="flex items-start"><CheckCircle2 className="w-6 h-6 text-accent mr-3 mt-1 flex-shrink-0" /><span><strong>Impact History:</strong> See a summary of your volunteer hours.</span></li>
                             </ul>
                         </div>
-                        <div className="bg-gray-100 p-6 md:p-8 rounded-2xl shadow-md"><img src="https://placehold.co/600x500/F3F4F6/1F2937?text=Mockup+of+Volunteer+Profile" alt="Volunteer Profile Mockup" className="rounded-xl w-full h-auto" /></div>
+                        <div className="bg-gray-100 p-6 md:p-8 rounded-2xl shadow-md"><img src={volunteerProfile} alt="Volunteer Profile Mockup" className="rounded-xl w-full h-auto" /></div>
                     </div>
                 </div>
             </div>
