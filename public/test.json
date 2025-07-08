@@ -1,0 +1,153 @@
+[
+    {
+        "_id": "6861c9ae0f61ffacc4e4cf1d",
+        "title": "Cox's Bazar Beach Cleanup",
+        "description": "Help restore one of Bangladesh’s most iconic beaches through collective cleanup.",
+        "type": "Cleanup",
+        "imageUrl": "https://i.postimg.cc/cLymyJST/Cox-s-Bazar-Beach-Cleanup.png",
+        "location": "Cox's Bazar, Chattogram",
+        "date": "2025-07-05T04:00:00.000Z",
+        "organizer": "Green Earth Foundation",
+        "volunteersNeeded": 20,
+        "volunteersJoined": 5,
+        "joinedUsers": [
+            "hdhimon@gmail.com"
+        ],
+        "addedBy": "hdhimon@gmail.com",
+        "updatedAt": "2025-07-07T20:02:39.845Z"
+    },
+    {
+        "_id": "6861c9ae0f61ffacc4e4cf1e",
+        "title": "Tree Plantation Day",
+        "description": "Join us to plant native trees along the highways and urban green zones.",
+        "type": "Plantation",
+        "imageUrl": "https://i.postimg.cc/LsvB1BZ0/Tree-Plantation-Day.png",
+        "location": "Gazipur, Dhaka",
+        "date": "2025-07-30T03:00:00.000Z",
+        "organizer": "Urban Greeners",
+        "volunteersNeeded": 30,
+        "volunteersJoined": 7,
+        "joinedUsers": [],
+        "addedBy": "hdhimon@gmail.com"
+    },
+    {
+        "_id": "6861c9ae0f61ffacc4e4cf1f",
+        "title": "Winter Clothes Donation",
+        "description": "Collect and distribute winter clothes to underprivileged families before the cold hits.",
+        "type": "Donation",
+        "imageUrl": "https://i.postimg.cc/FKhVzn1L/Winter-Clothes-Donation.png",
+        "location": "Mirpur-10, Dhaka",
+        "date": "2025-07-17T10:00:00.000Z",
+        "organizer": "Warm Bangladesh",
+        "volunteersNeeded": 50,
+        "volunteersJoined": 2,
+        "joinedUsers": [],
+        "addedBy": "hdhimon@gmail.com"
+    },
+    {
+        "_id": "6861c9ae0f61ffacc4e4cf20",
+        "title": "School Supply Drive",
+        "description": "Distribute notebooks, pencils, and school bags to rural primary school students.",
+        "type": "Education",
+        "imageUrl": "https://i.postimg.cc/nr9vgyS6/School-Supply-Drive.png",
+        "location": "Kishoreganj Sadar",
+        "date": "2025-07-20T02:00:00.000Z",
+        "organizer": "Bright Future Foundation",
+        "volunteersNeeded": 15,
+        "volunteersJoined": 2,
+        "joinedUsers": [],
+        "addedBy": "hdhimon@gmail.com"
+    },
+    {
+        "_id": "6861c9ae0f61ffacc4e4cf21",
+        "title": "Street Feeding Program",
+        "description": "Cook and distribute nutritious meals to homeless communities across Dhaka.",
+        "type": "Social Work",
+        "imageUrl": "https://i.postimg.cc/wvv5cyXx/Street-Feeding-Program.png",
+        "location": "Farmgate, Dhaka",
+        "date": "2025-07-23T11:00:00.000Z",
+        "organizer": "Meals of Hope",
+        "volunteersNeeded": 40,
+        "volunteersJoined": 3,
+        "joinedUsers": [
+            "hdhimon@gmail.com"
+        ],
+        "addedBy": "hdhimon@gmail.com"
+    },
+    {
+        "_id": "6861c9ae0f61ffacc4e4cf22",
+        "title": "Canal Cleanup & Awareness",
+        "description": "Clear garbage and educate locals about water pollution prevention.",
+        "type": "Cleanup",
+        "imageUrl": "https://i.postimg.cc/KzHP9GfP/Canal-Cleanup-Awareness.png",
+        "location": "Jatrabari, Dhaka",
+        "date": "2025-07-25T04:00:00.000Z",
+        "organizer": "Clean Dhaka Initiative",
+        "volunteersNeeded": 25,
+        "volunteersJoined": 5,
+        "joinedUsers": [
+            "hdhimon@gmail.com"
+        ],
+        "addedBy": "hdhimon@gmail.com"
+    },
+    {
+        "_id": "6861c9ae0f61ffacc4e4cf23",
+        "title": "Schoolyard Gardening",
+        "description": "Plant fruit and flower plants with school children to promote environmental education.",
+        "type": "Plantation",
+        "imageUrl": "https://i.postimg.cc/GhsQ5yZH/Schoolyard-Gardening.png",
+        "location": "Savar Model School",
+        "date": "2025-07-20T03:30:00.000Z",
+        "organizer": "EduGarden",
+        "volunteersNeeded": 25,
+        "volunteersJoined": 2,
+        "joinedUsers": [
+            "hdhimon@gmail.com"
+        ],
+        "addedBy": "hdhimon@gmail.com"
+    },
+    {
+        "_id": "6861c9ae0f61ffacc4e4cf24",
+        "title": "Book Donation for Libraries",
+        "description": "Collect used books and donate to community libraries in rural areas.",
+        "type": "Donation",
+        "imageUrl": "https://i.postimg.cc/RZ7TMzCm/Book-Donation-for-Libraries.png",
+        "location": "Rangpur City",
+        "date": "2025-07-28T09:00:00.000Z",
+        "organizer": "Readers Unite",
+        "volunteersNeeded": 10,
+        "volunteersJoined": 0,
+        "joinedUsers": [],
+        "addedBy": "hdhimon@gmail.com"
+    },
+    {
+        "_id": "6861c9ae0f61ffacc4e4cf25",
+        "title": "Digital Literacy Workshop",
+        "description": "Teach digital basics to underprivileged youth using laptops and visual content.",
+        "type": "Education",
+        "imageUrl": "https://i.postimg.cc/T2s009Nz/Digital-Literacy-Workshop.png",
+        "location": "Kurigram District",
+        "date": "2025-07-24T10:00:00.000Z",
+        "organizer": "Code for Change",
+        "volunteersNeeded": 12,
+        "volunteersJoined": 2,
+        "joinedUsers": [
+            "hdhimon@gmail.com"
+        ],
+        "addedBy": "hdhimon@gmail.com"
+    },
+    {
+        "_id": "6861c9ae0f61ffacc4e4cf26",
+        "title": "Senior Citizen Support Visit",
+        "description": "Spend a day helping and comforting the elderly at a community care center.",
+        "type": "Social Work",
+        "imageUrl": "https://i.postimg.cc/XXMwbsTX/Senior-Citizen-Support-Visit.png",
+        "location": "Dhanmondi, Dhaka",
+        "date": "2025-07-29T05:00:00.000Z",
+        "organizer": "ElderCare Bangladesh",
+        "volunteersNeeded": 18,
+        "volunteersJoined": 1,
+        "joinedUsers": [],
+        "addedBy": "hdhimon@gmail.com"
+    }
+]

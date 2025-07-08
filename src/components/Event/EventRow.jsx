@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { Calendar, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router';
+import { Link} from 'react-router';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import AuthContext from '../../contexts/AuthContext';
 
-const EventRow = ({ event }) => {
-    const { _id, title, date, imageUrl, location, type, volunteersNeeded, volunteersJoined } = event;
+const EventRow = ({ event, setHasJoined }) => {
+    const [alreadyJoined, setAlreadyJoined] = useState(false);
+    const { _id, title, date, imageUrl, location, type, volunteersNeeded, joinedUsers, volunteersJoined } = event;
+    const { user } = use(AuthContext);
 
     const dateObj = new Date(date);
     const formattedDate = dateObj.toLocaleDateString('en-US', {
@@ -26,6 +31,72 @@ const EventRow = ({ event }) => {
     };
 
     const volunteerPercentage = (volunteersJoined / volunteersNeeded) * 100;
+    useEffect(() => {
+        if (user) {
+            if (joinedUsers.includes(user?.email)) {
+                setAlreadyJoined(true);
+            }
+        }
+    }, [joinedUsers, user]);
+
+    const handleJoin = (id) => {
+        if (!user) {
+            Swal.fire({
+                title: 'Please Log In first',
+                text: 'You need to be logged in to join an event.',
+                icon: 'warning',
+                timer: 2000,
+                showConfirmButton: false,
+                timerProgressBar: true,
+            });
+            return;
+        }
+        Swal.fire({
+            title: 'Confirm Your Spot?',
+            text: `You are about to join "${title}"`,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, Count Me In!',
+            cancelButtonText: 'Not Now',
+            confirmButtonColor: '#4ade80',
+            cancelButtonColor: '#f87171',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.patch(`${import.meta.env.VITE_API_URL}/events/${id}/join`, {
+                    email: user.email,
+                }).then((response) => {
+                    if (response.data.success) {
+                        Swal.fire({
+                            title: 'Joined Successfully!',
+                            text: `You have successfully joined the event "${title}".`,
+                            icon: 'success',
+                            confirmButtonText: 'Great!',
+                            confirmButtonColor: '#8b5cf6'
+                        });
+                        setAlreadyJoined(true);
+                        setHasJoined(prev => !prev);
+                    } else {
+                        Swal.fire({
+                            title: 'Already Joined',
+                            text: 'You have already joined this event.',
+                            icon: 'info',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#8b5cf6'
+                        });
+                    }
+                }).catch((error) => {
+                    console.error('Error joining event:', error);
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'There was an issue joining the event. Please try again later.',
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#f87171'
+                    });
+                });
+            }
+        });
+    }
 
     return (
         <motion.div
@@ -82,8 +153,12 @@ const EventRow = ({ event }) => {
                 <Link to={`/events/${_id}`} className="w-full md:w-auto bg-primary text-primary-content text-center font-bold py-2 px-4 rounded-lg hover:bg-secondary transition-colors duration-300">
                     Details
                 </Link>
-                <button className="w-full md:w-auto bg-primary text-primary-content font-bold py-2 px-4 rounded-lg hover:bg-secondary transition-colors duration-300">
-                    Join <span className='md:hidden lg:inline'>Event</span>
+                <button
+                    onClick={() => handleJoin(_id)}
+                    className={`w-full bg-primary text-primary-content font-bold py-3 px-4 rounded-lg hover:bg-secondary transition-colors duration-300 ${alreadyJoined ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    disabled={alreadyJoined}
+                >
+                    {alreadyJoined ? 'Joined' : 'Join Event'}
                 </button>
             </div>
         </motion.div>

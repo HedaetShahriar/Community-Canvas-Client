@@ -16,7 +16,7 @@ const Register = () => {
                 const user = result.user;
                 setUser(user);
                 navigate('/');
-                console.log(user);
+                // console.log(user);
                 // showAlert('Welcome back!', user.displayName);
                 // navigate(`${location.state ? location.state : '/'}`);
             })

@@ -26,15 +26,12 @@ const router = createBrowserRouter([
             {
                 path: "/upcoming-events",
                 element: <UpcomingEvents />,
-                loader: async () => {
-                    const response = await axios.get(`${import.meta.env.VITE_API_URL}/events`);
-                    return response.data;
-                },
                 hydrateFallbackElement: <div className='text-2xl font-bold'>Loading Upcoming Events...</div>
             },
             {
-                path: "events/:id",
-                element: <PrivateRoutes><ViewEvent /></PrivateRoutes>
+                path: "/events/:id",
+                element: <PrivateRoutes><ViewEvent /></PrivateRoutes>,
+                hydrateFallbackElement: <div className='text-2xl font-bold'>Loading Event Details...</div>
             },
             {
                 path: "/create-event",

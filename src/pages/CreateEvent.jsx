@@ -53,7 +53,7 @@ const CreateEvent = () => {
     };
 
     // console.log(import.meta.env.VITE_API_URL);
-    console.log(formData);
+    // console.log(formData);
     const handleSubmit = e => {
         e.preventDefault();
         if (!validateForm()) return;

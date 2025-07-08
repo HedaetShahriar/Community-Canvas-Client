@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Edit, Trash2, PlusCircle, X, MapPin, Calendar, Eye, Tag, Send, Loader2 } from 'lucide-react';
+import { Edit, Trash2, PlusCircle, X, MapPin, Calendar, Eye, Tag, Send } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router';
 import LayoutToggleButton from '../components/LayoutToggleButton';
 import DatePicker from 'react-datepicker';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import useAuth from '../hooks/useAuth';
-import axios from 'axios';
-import Swal from 'sweetalert2';
 
 const eventTypeColors = {
     'Cleanup': 'bg-blue-100 text-blue-800',
@@ -18,20 +16,16 @@ const eventTypeColors = {
 };
 
 const EditEventModal = ({ event, isOpen, onClose, onSave }) => {
-    const [formData, setFormData] = useState(event || {});
+    const [formData, setFormData] = useState(event);
     const [errors, setErrors] = useState({});
     const [isSaving, setIsSaving] = useState(false);
 
     useEffect(() => {
-        setFormData(event || {});
+        setFormData(event);
+        setErrors({});
     }, [event]);
 
     if (!isOpen) return null;
-
-    const filterTime = (date) => {
-        const hour = date.getHours();
-        return hour >= 8 && hour <= 23;
-    };
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -48,6 +42,7 @@ const EditEventModal = ({ event, isOpen, onClose, onSave }) => {
         if (!formData.description?.trim()) newErrors.description = 'A description is required.';
         if (!formData.location?.trim()) newErrors.location = 'Location is required.';
         if (!formData.imageUrl?.trim()) newErrors.imageUrl = 'Image URL is required.';
+        if (!formData.eventType) newErrors.eventType = 'Please select an event type.';
         if (!formData.date) newErrors.date = 'Please select a date.';
         if (!formData.organizer?.trim()) newErrors.organizer = 'Organizer name is required.';
         if (!formData.volunteersNeeded || isNaN(formData.volunteersNeeded) || Number(formData.volunteersNeeded) <= 0)
@@ -61,163 +56,137 @@ const EditEventModal = ({ event, isOpen, onClose, onSave }) => {
         if (!validateForm()) return;
 
         setIsSaving(true);
-        const payload = {
-            ...formData,
-            date: formData.date
-                ? (formData.date instanceof Date
-                    ? formData.date.toISOString()
-                    : new Date(formData.date).toISOString())
-                : null,
-            volunteersNeeded: Number(formData.volunteersNeeded),
-        };
-        axios.patch(`${import.meta.env.VITE_API_URL}/events/my-events/${event._id}`, payload)
-            .then(response => {
-                onSave(response.data);
-            })
-            .catch(error => {
-                console.error("Error updating event:", error);
-                setErrors({ api: 'Failed to update event. Please try again.' });
-            })
-            .finally(() => {
-                setIsSaving(false);
-            });
+        onSave(formData);
+        setIsSaving(false);
     };
 
     return (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
             <motion.div
-                className="bg-base-100 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col"
+                className="bg-base-100 rounded-2xl shadow-2xl w-full max-w-2xl"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 50 }}
             >
-                <header className="p-6 border-b border-slate-200 flex justify-between items-center flex-shrink-0">
+                <header className="p-6 border-b border-slate-200 flex justify-between items-center">
                     <h2 className="text-xl font-bold">Edit Event</h2>
                     <button onClick={onClose} className="p-2 rounded-full hover:bg-slate-100">
                         <X className="w-6 h-6" />
                     </button>
                 </header>
 
-                <div className="overflow-y-auto p-8 space-y-6 flex-1">
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        <div>
-                            <label className="block text-sm font-bold mb-2">Event Title</label>
-                            <input
-                                name="title"
-                                type="text"
-                                value={formData.title}
-                                onChange={handleChange}
-                                className="w-full px-4 py-3 bg-base-200 border rounded-lg"
-                            />
-                            {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title}</p>}
-                        </div>
+                <form onSubmit={handleSubmit} className="p-8 space-y-6">
+                    <div>
+                        <label className="block text-sm font-bold mb-2">Event Title</label>
+                        <input
+                            name="title"
+                            type="text"
+                            value={formData.title}
+                            onChange={handleChange}
+                            className="w-full px-4 py-3 bg-base-300 border rounded-lg"
+                        />
+                        {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title}</p>}
+                    </div>
 
-                        <div>
-                            <label className="block text-sm font-bold mb-2">Location</label>
-                            <input
-                                name="location"
-                                type="text"
-                                value={formData.location}
-                                onChange={handleChange}
-                                className="w-full px-4 py-3 bg-base-200 border rounded-lg"
-                            />
-                            {errors.location && <p className="text-red-500 text-sm mt-1">{errors.location}</p>}
-                        </div>
+                    <div>
+                        <label className="block text-sm font-bold mb-2">Location</label>
+                        <input
+                            name="location"
+                            type="text"
+                            value={formData.location}
+                            onChange={handleChange}
+                            className="w-full px-4 py-3 bg-base-300 border rounded-lg"
+                        />
+                        {errors.location && <p className="text-red-500 text-sm mt-1">{errors.location}</p>}
+                    </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label className="font-semibold flex items-center gap-2 mb-1">
-                                    <Tag className="h-5 w-5" /> Event Type
-                                </label>
-                                <select
-                                    name="type"
-                                    value={formData.type}
-                                    onChange={handleChange}
-                                    className="w-full px-3 py-3 bg-base-200 border rounded-lg"
-                                >
-                                    <option value="" disabled>Select event type</option>
-                                    <option value="Cleanup">Cleanup</option>
-                                    <option value="Plantation">Plantation</option>
-                                    <option value="Donation">Donation</option>
-                                    <option value="Education">Education</option>
-                                    <option value="Social Work">Social Work</option>
-                                </select>
-                                {errors.eventType && <p className="text-red-500 text-sm mt-1">{errors.eventType}</p>}
-                            </div>
-                            <div className="flex flex-col gap-1">
-                                <label className="font-semibold flex items-center gap-2">
-                                    <Calendar className={`h-5 w-5 ${errors.date ? 'text-red-500' : ''}`} />
-                                    Event Date & Time
-                                </label>
-                                <DatePicker
-                                    name="date"
-                                    selected={formData.date? new Date(formData.date) : null}
-                                    onChange={handleDateChange}
-                                    minDate={new Date()}
-                                    showTimeSelect
-                                    dateFormat="MMMM d, yyyy h:mm aa"
-                                    placeholderText="Select a date and time"
-                                    filterTime={filterTime}
-                                    className={`w-full py-3 px-3 bg-base-200 border rounded-lg`}
-                                />
-                                {errors.date && <p className="text-red-500 text-sm mt-1">{errors.date}</p>}
-                            </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label className="font-semibold flex items-center gap-2 mb-1">
+                                <Tag className="h-5 w-5" /> Event Type
+                            </label>
+                            <select
+                                name="eventType"
+                                value={formData.eventType}
+                                onChange={handleChange}
+                                className="w-full px-3 py-3 bg-base-100 border rounded-lg"
+                            >
+                                <option disabled>Select event type</option>
+                                <option>Cleanup</option>
+                                <option>Plantation</option>
+                                <option>Donation</option>
+                                <option>Education</option>
+                            </select>
+                            {errors.eventType && <p className="text-red-500 text-sm mt-1">{errors.eventType}</p>}
                         </div>
 
                         <div>
-                            <label className="block text-sm font-bold mb-2">Image URL</label>
-                            <input
-                                name="imageUrl"
-                                type="text"
-                                value={formData.imageUrl}
-                                onChange={handleChange}
-                                className="w-full px-4 py-3 bg-base-200 border rounded-lg"
+                            <label className="font-semibold flex items-center gap-2 mb-1">
+                                <Calendar className="h-5 w-5" /> Event Date
+                            </label>
+                            <DatePicker
+                                selected={formData.date ? new Date(formData.date) : null}
+                                onChange={handleDateChange}
+                                minDate={new Date()}
+                                className="w-full py-3 px-3 bg-base-100 border rounded-lg"
                             />
-                            {errors.imageUrl && <p className="text-red-500 text-sm mt-1">{errors.imageUrl}</p>}
+                            {errors.date && <p className="text-red-500 text-sm mt-1">{errors.date}</p>}
                         </div>
+                    </div>
 
-                        <div>
-                            <label className="block text-sm font-bold mb-2">Organizer</label>
-                            <input
-                                name="organizer"
-                                type="text"
-                                value={formData.organizer}
-                                onChange={handleChange}
-                                className="w-full px-4 py-3 bg-base-200 border rounded-lg"
-                            />
-                            {errors.organizer && <p className="text-red-500 text-sm mt-1">{errors.organizer}</p>}
-                        </div>
+                    <div>
+                        <label className="block text-sm font-bold mb-2">Image URL</label>
+                        <input
+                            name="imageUrl"
+                            type="text"
+                            value={formData.imageUrl}
+                            onChange={handleChange}
+                            className="w-full px-4 py-3 bg-base-300 border rounded-lg"
+                        />
+                        {errors.imageUrl && <p className="text-red-500 text-sm mt-1">{errors.imageUrl}</p>}
+                    </div>
 
-                        <div>
-                            <label className="block text-sm font-bold mb-2">Volunteers Needed</label>
-                            <input
-                                name="volunteersNeeded"
-                                type="number"
-                                value={formData.volunteersNeeded}
-                                onChange={handleChange}
-                                className="w-full px-4 py-3 bg-base-200 border rounded-lg"
-                            />
-                            {errors.volunteersNeeded && <p className="text-red-500 text-sm mt-1">{errors.volunteersNeeded}</p>}
-                        </div>
+                    <div>
+                        <label className="block text-sm font-bold mb-2">Organizer</label>
+                        <input
+                            name="organizer"
+                            type="text"
+                            value={formData.organizer}
+                            onChange={handleChange}
+                            className="w-full px-4 py-3 bg-base-300 border rounded-lg"
+                        />
+                        {errors.organizer && <p className="text-red-500 text-sm mt-1">{errors.organizer}</p>}
+                    </div>
 
-                        <div>
-                            <label className="block text-sm font-bold mb-2">Description</label>
-                            <textarea
-                                name="description"
-                                rows={4}
-                                value={formData.description}
-                                onChange={handleChange}
-                                className="w-full px-4 py-3 bg-base-200 border rounded-lg"
-                            />
-                            {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description}</p>}
-                        </div>
-                    </form>
-                </div>
+                    <div>
+                        <label className="block text-sm font-bold mb-2">Volunteers Needed</label>
+                        <input
+                            name="volunteersNeeded"
+                            type="number"
+                            value={formData.volunteersNeeded}
+                            onChange={handleChange}
+                            className="w-full px-4 py-3 bg-base-300 border rounded-lg"
+                        />
+                        {errors.volunteersNeeded && <p className="text-red-500 text-sm mt-1">{errors.volunteersNeeded}</p>}
+                    </div>
 
-                <footer className="p-6 border-t bg-base-100 flex justify-end gap-4 flex-shrink-0">
+                    <div>
+                        <label className="block text-sm font-bold mb-2">Description</label>
+                        <textarea
+                            name="description"
+                            rows={4}
+                            value={formData.description}
+                            onChange={handleChange}
+                            className="w-full px-4 py-3 bg-base-300 border rounded-lg"
+                        />
+                        {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description}</p>}
+                    </div>
+                </form>
+
+                <footer className="p-6 border-t border-slate-200 flex justify-end gap-4">
                     <button
                         onClick={onClose}
-                        className="px-6 py-2 rounded-lg font-semibold bg-secondary hover:bg-primary"
+                        className="px-6 py-2 rounded-lg font-semibold bg-slate-100 hover:bg-slate-200"
                     >
                         Cancel
                     </button>
@@ -225,18 +194,17 @@ const EditEventModal = ({ event, isOpen, onClose, onSave }) => {
                     <motion.button
                         onClick={handleSubmit}
                         disabled={isSaving}
-                        className="px-6 py-2 rounded-lg font-semibold bg-primary text-primary-content hover:bg-primary/90 disabled:bg-slate-400 disabled:cursor-not-allowed flex items-center gap-2"
+                        className="px-6 py-2 rounded-lg font-semibold bg-primary text-white hover:bg-primary/90 disabled:bg-slate-400 disabled:cursor-not-allowed flex items-center gap-2"
                         whileHover={{ scale: isSaving ? 1 : 1.02 }}
                         whileTap={{ scale: isSaving ? 1 : 0.98 }}
                     >
-                        {isSaving ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />} Save Changes
+                        {isSaving ? <><Loader2 className="w-5 h-5 animate-spin" /> Saving...</> : <><Send className="w-5 h-5" /> Save Changes</>}
                     </motion.button>
                 </footer>
             </motion.div>
         </div>
     );
 };
-
 
 const DeleteConfirmationModal = ({ event, isOpen, onClose, onConfirm }) => {
     if (!isOpen) return null;
@@ -253,7 +221,7 @@ const DeleteConfirmationModal = ({ event, isOpen, onClose, onConfirm }) => {
                 <p className="mt-2">Delete "<strong>{event.title}</strong>"? This cannot be undone.</p>
                 <div className="flex justify-center gap-4 mt-8">
                     <button onClick={onClose} className="px-6 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 font-semibold">Cancel</button>
-                    <button onClick={() => onConfirm(event._id)} className="px-6 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 font-semibold">Delete</button>
+                    <button onClick={() => onConfirm(event.id)} className="px-6 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 font-semibold">Delete</button>
                 </div>
             </motion.div>
         </div>
@@ -322,7 +290,7 @@ const EventCardGrid = ({ event, onEdit, onDelete }) => {
 };
 
 const EventCardRow = ({ event, onEdit, onDelete }) => {
-    const { _id, title, date, description, imageUrl, location, type, volunteersNeeded, volunteersJoined, organizer } = event || {};
+    const { _id, title, date, description, imageUrl, location, type, volunteersNeeded, volunteersJoined, organizer} = event || {};
 
     const dateObj = new Date(date);
     const formattedDate = dateObj.toLocaleDateString('en-US', {
@@ -413,17 +381,11 @@ const EventCardRow = ({ event, onEdit, onDelete }) => {
 
 const ManageEvents = () => {
     const [myEvents, setMyEvents] = useState([]);
-    const [selectedEvent, setSelectedEvent] = useState(null);
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-    const [isUpdated, setIsUpdated] = useState(false);
-
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
-    // const [isUdating, setIsUpdating] = useState(false);
 
     useEffect(() => {
-        axiosSecure.get(`/events/my-events?email=${user.email}`)
+        axiosSecure.get(`/events/myevents?email=${user.email}`)
             .then(response => {
                 // console.log("My Events:", response.data);
                 setMyEvents(response.data);
@@ -431,11 +393,15 @@ const ManageEvents = () => {
             .catch(error => {
                 console.error("Error fetching my events:", error);
             });
-    }, [isUpdated]);
+    }, []);
 
 
 
     const [layout, setLayout] = useState(localStorage.getItem('eventLayout') || 'grid');
+
+    const [selectedEvent, setSelectedEvent] = useState(null);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
     const handleOpenEdit = event => {
         setSelectedEvent(event);
@@ -445,43 +411,13 @@ const ManageEvents = () => {
         setSelectedEvent(event);
         setIsDeleteModalOpen(true);
     };
-    // Fix saving by matching _id
     const handleSaveChanges = updatedEvent => {
-        setMyEvents(myEvents.map(e => e._id === updatedEvent._id ? updatedEvent : e));
-        setIsUpdated(!isUpdated);
-        Swal.fire({
-            title: 'Event Updated!',
-            text: `"${updatedEvent.title}" has been successfully updated.`,
-            icon: 'success',
-            confirmButtonText: 'OK',        
-            confirmButtonColor: '#8b5cf6',
-        });
+        setMyEvents(myEvents.map(e => e.id === updatedEvent.id ? updatedEvent : e));
         setIsEditModalOpen(false);
-        setSelectedEvent(null);
     };
-
-    // Fix deleting by _id
     const handleDeleteConfirm = eventId => {
-        setMyEvents(myEvents.filter(e => e._id !== eventId));
-        axiosSecure.delete(`/events/my-events/${eventId}?email=${user.email}`)
-            .then(response => {
-            if (response.data.success) {
-                Swal.fire({
-                    title: 'Event Deleted!',
-                    text: `"${selectedEvent.title}" has been successfully deleted.`,
-                    icon: 'success',
-                    confirmButtonText: 'OK',        
-                    confirmButtonColor: '#8b5cf6',
-                });
-            }  else {
-                console.error("Delete failed:", response.data.message);
-            }
-            })
-            .catch(error => {
-                console.error("Error deleting event:", error);
-            });
+        setMyEvents(myEvents.filter(e => e.id !== eventId));
         setIsDeleteModalOpen(false);
-        setSelectedEvent(null);
     };
 
     return (
