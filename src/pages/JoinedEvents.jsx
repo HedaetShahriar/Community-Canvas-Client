@@ -212,7 +212,7 @@ const JoinedEvents = () => {
     };
 
     return (
-        <div className="bg-base-200 min-h-screen py-16 px-6">
+        <div className="bg-base-200 min-h-[calc(100vh-215px)] py-16 px-6">
             <div className="container mx-auto">
                 <div className="text-center mb-12">
                     <h1 className="text-4xl md:text-5xl font-extrabold">My Joined Events</h1>

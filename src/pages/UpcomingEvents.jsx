@@ -31,7 +31,7 @@ const UpcomingEvents = () => {
 
     if (!upcomingEvent || upcomingEvent.length === 0) {
         return (
-            <div className="bg-base-300 min-h-screen flex items-center justify-center">
+            <div className="bg-base-300 min-h-[calc(100vh-215px)] flex items-center justify-center">
                 <div className="text-center p-6 bg-base-100 rounded-lg shadow-md">
                     <h2 className="text-2xl font-bold mb-4">No Upcoming Events</h2>
                     <p className="">There are currently no upcoming events. Please

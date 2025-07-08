@@ -485,7 +485,7 @@ const ManageEvents = () => {
     };
 
     return (
-        <div className="bg-base-200 min-h-screen py-16 px-4 md:px-8">
+        <div className="bg-base-200 min-h-[calc(100vh-215px)] py-16 px-4 md:px-8">
             <div className="container mx-auto">
                 <div className="flex flex-col text-center md:text-left md:flex-row justify-between items-center gap-4 mb-8">
                     <div>

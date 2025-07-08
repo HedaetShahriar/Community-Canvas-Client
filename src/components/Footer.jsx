@@ -1,6 +1,7 @@
 import React from 'react';
 import { Github, Facebook, Linkedin } from 'lucide-react';
 import { Link, NavLink } from 'react-router';
+import logo from '../assets/logo.png';
 const Footer = () => {
     const navLinks = (
         <>
@@ -65,11 +66,14 @@ const Footer = () => {
         <footer className="bg-base-200/60 backdrop-blur-xl border-t border-gray-400/80">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="py-8 flex flex-col items-center justify-between gap-8 md:flex-row">
-                    <Link to="/" className="flex items-center gap-2.5">
-                        {/* <div className="bg-blue-600 p-2 rounded-lg">logo</div> */}
-                        {/* LOGO */}
-                        <span className="text-lg font-semibold">CommunityCanvas</span>
-                    </Link>
+                    <div className='flex items-center gap-2'>
+                        <Link to="/">
+                            <img src={logo} className='w-14 h-14' alt="" />
+                        </Link>
+                        <Link to="/" className="text-xl md:text-2xl font-semibold">
+                            CommunityCanvas
+                        </Link>
+                    </div>
                     <nav>
                         <ul className="flex flex-col items-center justify-center gap-4">
                             <div className='flex flex-wrap gap-4'>

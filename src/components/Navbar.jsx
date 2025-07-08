@@ -4,6 +4,7 @@ import ToggleTheme from './ToggleTheme';
 import { MdLogout } from 'react-icons/md';
 import AuthContext from '../contexts/AuthContext';
 import userIcon from '../assets/userIcon.png'
+import logo from '../assets/logo.png';
 
 const Navbar = () => {
     const { user, logOut } = use(AuthContext);
@@ -117,9 +118,14 @@ const Navbar = () => {
                                 {navLinks}
                             </ul>
                         </div>
-                        <Link to="/" className="text-xl md:text-2xl font-bold">
-                            CommunityCanvas
-                        </Link>
+                        <div className='flex items-center gap-2'>
+                            <Link to="/">
+                                <img src={logo} className='w-14 h-14' alt="" />
+                            </Link>
+                            <Link to="/" className="text-xl md:text-2xl font-bold hidden md:inline-flex">
+                                CommunityCanvas
+                            </Link>
+                        </div>
                     </div>
                 </div>
 
