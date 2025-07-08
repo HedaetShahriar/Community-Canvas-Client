@@ -17,9 +17,9 @@ const ContactUs = () => {
 
     return (
         <>
-            <div className="min-h-screen bg-base-200 antialiased">
+            <div className="min-h-[calc(100vh-250px)] bg-base-200 antialiased py-6 md:py-10">
                 {/* Header Section */}
-                <header className="bg-base-200 text-center py-16 px-6">
+                <header className="bg-base-200 text-center pb-16 pt-6 px-6">
                     <h1 className="text-4xl md:text-6xl font-extrabold">Get in Touch</h1>
                     <p className="text-lg mt-4 max-w-2xl mx-auto">
                         We're here to help and answer any question you might have. We look forward to hearing from you!

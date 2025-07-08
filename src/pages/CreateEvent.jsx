@@ -95,7 +95,7 @@ const CreateEvent = () => {
     };
 
     return (
-        <div className="bg-base-200 min-h-screen p-4 sm:p-8 flex items-center justify-center">
+        <div className="bg-base-200 min-h-[calc(100vh-250px)] p-4 sm:p-8 flex items-center justify-center">
             <motion.div
                 className="w-full max-w-2xl"
                 initial={{ opacity: 0, y: -50 }}

@@ -94,7 +94,7 @@ const ViewEvent = () => {
     };
 
     return (
-        <div className="bg-base-300 min-h-screen font-sans relative">
+        <div className="bg-base-300 min-h-[calc(100vh-250px)] font-sans relative">
             <motion.article initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
                 <header className="h-[50vh] relative">
                     <img
