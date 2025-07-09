@@ -12,7 +12,7 @@ import ManageEvents from "../pages/ManageEvents";
 import ViewEvent from "../pages/ViewEvent";
 import CreateEvent from "../pages/CreateEvent";
 import PrivateRoutes from "./PrivateRoutes";
-import axios from "axios";
+// import axios from "axios";
 import Spinner from "../components/Spinner";
 
 const router = createBrowserRouter([

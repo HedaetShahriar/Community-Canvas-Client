@@ -8,7 +8,6 @@ import logo from '../assets/logo.png';
 
 const Navbar = () => {
     const { user, logOut } = use(AuthContext);
-    // console.log(user);
 
     const navLinks = (
         <>
