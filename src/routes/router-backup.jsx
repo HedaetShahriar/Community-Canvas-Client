@@ -71,16 +71,6 @@ const router = createBrowserRouter([
             }
         ]
     },
-            {
-                path: "/about",
-                element: <div className='text-2xl font-bold'>About</div>
-            },
-            {
-                path: "/contact",
-                element: <ContactUs />
-            }
-        ]
-    },
     {
         path: "/auth/login",
         element: <SignIn />
