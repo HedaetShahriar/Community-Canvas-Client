@@ -129,7 +129,7 @@ CommunityCanvas addresses these challenges by providing:
 |------------|---------|---------|
 | **React** | ^19.1.0 | Core UI library with hooks and context |
 | **Vite** | ^6.3.5 | Build tool and development server |
-| **React Router DOM** | ^7.6.2 | Client-side routing and navigation |
+| **React Router** | ^7.6.2 | Client-side routing and navigation |
 | **TailwindCSS** | ^4.1.8 | Utility-first CSS framework |
 | **DaisyUI** | ^5.0.43 | Pre-built Tailwind components |
 | **Framer Motion** | ^12.18.1 | Animation and gesture library |
