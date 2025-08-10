@@ -54,6 +54,17 @@ const Navbar = () => {
     );
     const dropdownLinks = (
         <>
+            {/* <li><NavLink
+                to="/dashboard"
+                className={({ isActive }) =>
+                    `px-3 py-1 rounded transition-colors duration-150 ${isActive
+                        ? "text-accent-content"
+                        : " hover:text-accent-content"
+                    }`
+                }
+            >
+                Dashboard
+            </NavLink></li> */}
             <li><NavLink
                 to="/create-event"
                 className={({ isActive }) =>
