@@ -46,7 +46,7 @@ const ContactUs = () => {
                                 </div>
                                 <div>
                                     <h3 className="text-lg font-bold">Email Us</h3>
-                                    <a href="mailto:contact@commuserve.org" className="hover:underline">contact@commuserve.org</a>
+                                    <a href="mailto:hdhimon@gmail.com" className="hover:underline">contact@commuserve.org</a>
                                     <p className="text-sm">For general inquiries and support</p>
                                 </div>
                             </div>
