@@ -28,7 +28,7 @@ const ContactUs = () => {
 
                 {/* Main Content */}
                 <section className="mb-10 px-2">
-                    <div className="container mx-auto border-1 border-gray-300 p-6 rounded-2xl grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                    <div className="container mx-auto border-1 border-gray-300/30 p-6 rounded-2xl grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                         {/* Left Column: Contact Info */}
                         <div className="flex flex-col justify-center gap-8">
                             <div className="flex gap-4">
@@ -56,7 +56,7 @@ const ContactUs = () => {
                                 </div>
                                 <div>
                                     <h3 className="text-lg font-bold">Call Us</h3>
-                                    <a href="tel:+8801700000000" className="hover:underline">+880 1700-000000</a>
+                                    <a href="tel:+8801741453691" className="hover:underline">+880 1741-453691</a>
                                     <p className="text-sm">Mon - Fri, 9am - 6pm</p>
                                 </div>
                             </div>
