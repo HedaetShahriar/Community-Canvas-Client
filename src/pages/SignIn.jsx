@@ -5,8 +5,6 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import AuthContext from "../contexts/AuthContext";
 import logo from '../assets/logo.png';
-// import { HiOutlineMail } from "react-icons/hi";
-// import { TbLockPassword } from "react-icons/tb";
 
 const SignIn = () => {
     const { signInUser, googleSignIn, setUser } = use(AuthContext);

@@ -31,7 +31,7 @@ const HowItWorks = () => {
     );
 
     return (
-        <section className="bg-base-100 py-16 md:py-20">
+        <section className="bg-base-100 pt-16 md:pt-20">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-12 md:mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold text-dark">How Community Canvas Works</h2>

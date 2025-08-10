@@ -3,7 +3,7 @@ import backgroundImage from '../../assets/background1.png'
 
 const CreateEventCTA = () => {
     return (
-        <section className="relative bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover' }}>
+        <section className="relative bg-cover bg-center mt-10 md:mt-20" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover' }}>
         <div className="container mx-auto px-6 py-20 md:py-24">
             <div className="absolute inset-0 bg-black/30"></div>
             <div className="mx-auto max-w-2xl">
