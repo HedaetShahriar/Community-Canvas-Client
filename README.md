@@ -68,20 +68,94 @@
 ## 📁 Project Structure
 
 ```
-client/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── routes/
-│   ├── hooks/
-│   ├── utils/
-│   └── App.jsx
-server/
-├── routes/
-├── controllers/
-├── middlewares/
-├── .env
-├── index.js
+CommunityCanvas/
+├── 📁 .firebase/
+│   └── 🗑️ hosting.ZGlzdA.cache 🚫 (auto-hidden)
+├── 📁 .git/ 🚫 (auto-hidden)
+├── 📁 dist/ 🚫 (auto-hidden)
+├── 📁 node_modules/ 🚫 (auto-hidden)
+├── 📁 public/
+│   ├── 📄 test.json
+│   └── 🖼️ vite.svg
+├── 📁 src/
+│   ├── 📁 assets/
+│   │   ├── 🖼️ background1.png
+│   │   ├── 🖼️ cleaning.png
+│   │   ├── 🖼️ communityArt.png
+│   │   ├── 🖼️ createEvents.png
+│   │   ├── 🖼️ happyVolunteers.png
+│   │   ├── 🖼️ joinedEvent.png
+│   │   ├── 🖼️ logo.png
+│   │   ├── 🖼️ manageEvents.png
+│   │   ├── 🖼️ planting.png
+│   │   ├── 🖼️ react.svg
+│   │   ├── 🖼️ searchEvents.png
+│   │   ├── 🖼️ success.png
+│   │   ├── 🖼️ teamwork.png
+│   │   ├── 🖼️ upcomingEvents.png
+│   │   ├── 🖼️ userIcon.png
+│   │   └── 🖼️ volunteers Working.png
+│   ├── 📁 components/
+│   │   ├── 📁 CreateEvent/
+│   │   │   ├── 📄 EventForm.jsx
+│   │   │   └── 📄 FormElements.jsx
+│   │   ├── 📁 Event/
+│   │   │   ├── 📄 EventRow.jsx
+│   │   │   ├── 📄 GridCard.jsx
+│   │   │   └── 📄 SearchFilter.jsx
+│   │   ├── 📁 Home/
+│   │   │   ├── 📄 Banner.jsx
+│   │   │   ├── 📄 CreateEventCTA.jsx
+│   │   │   ├── 📄 Features.jsx
+│   │   │   ├── 📄 Gallery.jsx
+│   │   │   ├── 📄 HowItWorks.jsx
+│   │   │   └── 📄 Newsletter.jsx
+│   │   ├── 📄 Footer.jsx
+│   │   ├── 📄 LayoutToggleButton.jsx
+│   │   ├── 📄 Navbar.jsx
+│   │   ├── 📄 Pagination.jsx
+│   │   ├── 📄 Spinner.jsx
+│   │   └── 📄 ToggleTheme.jsx
+│   ├── 📁 contexts/
+│   │   ├── 📄 AuthContext.jsx
+│   │   └── 📄 AuthProvider.jsx
+│   ├── 📁 firebase/
+│   │   └── 📄 firebase.config.js
+│   ├── 📁 hooks/
+│   │   ├── 📄 useAuth.jsx
+│   │   └── 📄 useAxiosSecure.jsx
+│   ├── 📁 layouts/
+│   │   └── 📄 MainLayout.jsx
+│   ├── 📁 pages/
+│   │   ├── 📄 About.jsx
+│   │   ├── 📄 ContactUs.jsx
+│   │   ├── 📄 CreateEvent.jsx
+│   │   ├── 📄 Home.jsx
+│   │   ├── 📄 JoinedEvents.jsx
+│   │   ├── 📄 ManageEvents.jsx
+│   │   ├── 📄 Register.jsx
+│   │   ├── 📄 SignIn.jsx
+│   │   ├── 📄 UpcomingEvents.jsx
+│   │   └── 📄 ViewEvent.jsx
+│   ├── 📁 routes/
+│   │   ├── 📄 PrivateRoutes.jsx
+│   │   └── 📄 router.jsx
+│   ├── 📁 utils/
+│   ├── 🎨 App.css
+│   ├── 📄 App.jsx
+│   ├── 🎨 index.css
+│   └── 📄 main.jsx
+├── 🔒 .env 🚫 (auto-hidden)
+├── 📄 .firebaserc
+├── 🚫 .gitignore 🚫 (auto-hidden)
+├── 📖 README.md
+├── 📄 eslint.config.js
+├── 📄 firebase.json
+├── 🌐 index.html
+├── 📄 package-lock.json 🚫 (auto-hidden)
+├── 📄 package.json
+├── 📋 pglite-debug.log 🚫 (auto-hidden)
+└── 📄 vite.config.js
 ```
 
 ---
