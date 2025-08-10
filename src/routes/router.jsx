@@ -31,7 +31,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/events/:id",
-                element: <PrivateRoutes><ViewEvent /></PrivateRoutes>,
+                element: <ViewEvent />,
                 hydrateFallbackElement: <Spinner/>
             },
             {

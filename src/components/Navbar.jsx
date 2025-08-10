@@ -167,7 +167,7 @@ const Navbar = () => {
                             </ul>
                         </div>
                     ) : (
-                        <Link to="/auth/login" className="btn btn-primary btn-outline">
+                        <Link to="/auth/login" className="btn btn-warning btn-outline">
                             Login
                         </Link>
                     )}
